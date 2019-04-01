@@ -62,7 +62,7 @@ static Checkpoints::MapCheckpoints mapCheckpoints = boost::assign::map_list_of
 
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
-        1550949577, // * UNIX timestamp of last checkpoint block
+        1554159502, // * UNIX timestamp of last checkpoint block
         1197936,    // * total number of transactions between genesis and last checkpoint
         //               (the tx=... number in UpdateTip debug.log lines)
         2438.911721 // * estimated number of transactions per day after checkpoint
@@ -156,7 +156,7 @@ public:
         const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Motion Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1507656633;
+        txNew.nTime = 1554159502;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -167,19 +167,19 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
         genesis.nVersion = 1;
-        genesis.nTime = 1507656633; //
+        genesis.nTime = 1554159502; //
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 986946;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-        /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+          while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
               genesis.nNonce ++;
           }
 
           std::cout << genesis.nNonce << std::endl;
           std::cout << genesis.GetHash().GetHex() << std::endl;
-          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
+          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; 
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -215,7 +215,7 @@ public:
         strSporkKey = "04a983220ea7a38a7106385003fef77896538a382a0dcc389cc45f3c98751d9af423a097789757556259351198a8aaa628a1fd644c3232678c5845384c744ff8d7";
 
         strDarksendPoolDummyAddress = "LgcjpYxWa5EB9KCYaRtpPgG8kgiWRvJY38";
-        nStartMasternodePayments = 1507656633; //
+        nStartMasternodePayments = 1554159502; //
 
         nStakingRoundPeriod = 120; // 2 minutes a round
         nStakingInterval = 22;
@@ -274,7 +274,7 @@ public:
         const char* pszTimestamp = "Motion - Testnet 1"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1528954643;
+        txNew.nTime = 1554159502;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -286,7 +286,7 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
         genesis.nVersion = 1;
-        genesis.nTime = 1528954643; // 14 June 2018 @ 5:37am (UTC)
+        genesis.nTime = 1554159502; // 14 June 2018 @ 5:37am (UTC)
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 7170961;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
@@ -340,7 +340,7 @@ public:
         strSporkKey = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
 
         strDarksendPoolDummyAddress = "LPGq7DZbqZ8Vb3tfLH8Z8VHqeV4fsK68oX";
-        nStartMasternodePayments = 1528954643; //Fri, 09 Jan 2015 21:05:58 GMT
+        nStartMasternodePayments = 1554159502; //Fri, 09 Jan 2015 21:05:58 GMT
 
         nStakingRoundPeriod = 120; // 5 seconds a round
         nStakingInterval = 22; // 30 seconds
@@ -396,7 +396,7 @@ public:
         pchMessageStart[3] = 0xac;
         nMinerThreads = 1;
         nMaturity = 2;
-        genesis.nTime = 1454124731;
+        genesis.nTime = 1554159502;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 1;
 
@@ -508,7 +508,7 @@ public:
         const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Motion Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1524645689;
+        txNew.nTime = 1554159502;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -521,17 +521,17 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
         genesis.nVersion = 1;
-        genesis.nTime = 1524645689;
+        genesis.nTime = 1554159502;
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 729147;
+        genesis.nNonce = 1;
 
-        /*while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+      /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
             genesis.nNonce ++;
         }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;*/
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -557,7 +557,7 @@ public:
         strSporkKey = "04a983220ea7a38a7106385003fef77896538a382a0dcc389cc45f3c98751d9af423a097789757556259351198a8aaa628a1fd644c3232678c5845384c744ff8d7";
 
         strDarksendPoolDummyAddress = "LgcjpYxWa5EB9KCYaRtpPgG8kgiWRvJY38";
-        nStartMasternodePayments = 1507656633; //
+        nStartMasternodePayments = 1554159502; //
 
         nStakingRoundPeriod = 120; // 2 minutes a round
         nStakingInterval = 22;
