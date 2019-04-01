@@ -7,23 +7,23 @@ using namespace std;
 using namespace dev;
 using namespace dev::eth;
 
-LuxState::LuxState(u256 const& _accountStartNonce, OverlayDB const& _db, const string& _path, BaseState _bs) :
+MotionState::MotionState(u256 const& _accountStartNonce, OverlayDB const& _db, const string& _path, BaseState _bs) :
         State(_accountStartNonce, _db, _bs) {
-            dbUTXO = LuxState::openDB(_path + "/motionDB", sha3(rlp("")), WithExisting::Trust);
+            dbUTXO = MotionState::openDB(_path + "/motionDB", sha3(rlp("")), WithExisting::Trust);
 	        stateUTXO = SecureTrieDB<Address, OverlayDB>(&dbUTXO);
 }
 
-LuxState::LuxState() : dev::eth::State(dev::Invalid256, dev::OverlayDB(), dev::eth::BaseState::PreExisting) {
+MotionState::MotionState() : dev::eth::State(dev::Invalid256, dev::OverlayDB(), dev::eth::BaseState::PreExisting) {
     dbUTXO = OverlayDB();
     stateUTXO = SecureTrieDB<Address, OverlayDB>(&dbUTXO);
 }
 
-ResultExecute LuxState::execute(EnvInfo const& _envInfo, SealEngineFace const& _sealEngine, LuxTransaction const& _t, Permanence _p, OnOpFunc const& _onOp){
+ResultExecute MotionState::execute(EnvInfo const& _envInfo, SealEngineFace const& _sealEngine, MotionTransaction const& _t, Permanence _p, OnOpFunc const& _onOp){
 
     assert(_t.getVersion().toRaw() == VersionVM::GetEVMDefault().toRaw());
 
     addBalance(_t.sender(), _t.value() + (_t.gas() * _t.gasPrice()));
-    newAddress = _t.isCreation() ? createLuxAddress(_t.getHashWith(), _t.getNVout()) : dev::Address();
+    newAddress = _t.isCreation() ? createMotionAddress(_t.getHashWith(), _t.getNVout()) : dev::Address();
 
     _sealEngine.deleteAddresses.insert({_t.sender(), _envInfo.author()});
 
@@ -126,7 +126,7 @@ ResultExecute LuxState::execute(EnvInfo const& _envInfo, SealEngineFace const& _
     }
 }
 
-std::unordered_map<dev::Address, Vin> LuxState::vins() const // temp
+std::unordered_map<dev::Address, Vin> MotionState::vins() const // temp
 {
     std::unordered_map<dev::Address, Vin> ret;
     for (auto& i: cacheUTXO)
@@ -140,19 +140,19 @@ std::unordered_map<dev::Address, Vin> LuxState::vins() const // temp
     return ret;
 }
 
-void LuxState::transferBalance(dev::Address const& _from, dev::Address const& _to, dev::u256 const& _value) {
+void MotionState::transferBalance(dev::Address const& _from, dev::Address const& _to, dev::u256 const& _value) {
     subBalance(_from, _value);
     addBalance(_to, _value);
     if (_value > 0)
         transfers.push_back({_from, _to, _value});
 }
 
-Vin const* LuxState::vin(dev::Address const& _a) const
+Vin const* MotionState::vin(dev::Address const& _a) const
 {
-    return const_cast<LuxState*>(this)->vin(_a);
+    return const_cast<MotionState*>(this)->vin(_a);
 }
 
-Vin* LuxState::vin(dev::Address const& _addr)
+Vin* MotionState::vin(dev::Address const& _addr)
 {
     auto it = cacheUTXO.find(_addr);
     if (it == cacheUTXO.end()){
@@ -171,7 +171,7 @@ Vin* LuxState::vin(dev::Address const& _addr)
     return &it->second;
 }
 
-// void LuxState::commit(CommitBehaviour _commitBehaviour)
+// void MotionState::commit(CommitBehaviour _commitBehaviour)
 // {
 //     if (_commitBehaviour == CommitBehaviour::RemoveEmptyAccounts)
 //         removeEmptyAccounts();
@@ -185,7 +185,7 @@ Vin* LuxState::vin(dev::Address const& _addr)
 //     m_unchangedCacheEntries.clear();
 // }
 
-void LuxState::kill(dev::Address _addr)
+void MotionState::kill(dev::Address _addr)
 {
     // If the account is not in the db, nothing to kill.
     if (auto a = account(_addr))
@@ -194,7 +194,7 @@ void LuxState::kill(dev::Address _addr)
         v->alive = 0;
 }
 
-void LuxState::addBalance(dev::Address const& _id, dev::u256 const& _amount)
+void MotionState::addBalance(dev::Address const& _id, dev::u256 const& _amount)
 {
     if (dev::eth::Account* a = account(_id))
     {
@@ -225,7 +225,7 @@ void LuxState::addBalance(dev::Address const& _id, dev::u256 const& _amount)
         m_changeLog.emplace_back(dev::eth::detail::Change::Balance, _id, _amount);
 }
 
-const dev::Address LuxState::createLuxAddress(dev::h256 hashTx, uint32_t voutNumber){
+const dev::Address MotionState::createMotionAddress(dev::h256 hashTx, uint32_t voutNumber){
     uint256 hashTXid(h256Touint(hashTx));
 	std::vector<unsigned char> txIdAndVout(hashTXid.begin(), hashTXid.end());
 	std::vector<unsigned char> voutNumberChrs;
@@ -242,7 +242,7 @@ const dev::Address LuxState::createLuxAddress(dev::h256 hashTx, uint32_t voutNum
 	return dev::Address(hashTxIdAndVout);
 }
 
-void LuxState::deleteAccounts(std::set<dev::Address>& addrs){
+void MotionState::deleteAccounts(std::set<dev::Address>& addrs){
     for(dev::Address addr : addrs){
         dev::eth::Account* acc = const_cast<dev::eth::Account*>(account(addr));
         if(acc)
@@ -253,7 +253,7 @@ void LuxState::deleteAccounts(std::set<dev::Address>& addrs){
     }
 }
 
-void LuxState::updateUTXO(const std::unordered_map<dev::Address, Vin>& vins){
+void MotionState::updateUTXO(const std::unordered_map<dev::Address, Vin>& vins){
     for(auto& v : vins){
         Vin* vi = const_cast<Vin*>(vin(v.first));
 
@@ -268,7 +268,7 @@ void LuxState::updateUTXO(const std::unordered_map<dev::Address, Vin>& vins){
     }
 }
 
-void LuxState::printfErrorLog(const dev::eth::TransactionException er){
+void MotionState::printfErrorLog(const dev::eth::TransactionException er){
     std::stringstream ss;
     ss << er;
     clog(ExecutiveWarnChannel) << "VM exception:" << ss.str();

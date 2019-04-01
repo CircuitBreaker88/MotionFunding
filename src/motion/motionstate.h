@@ -58,15 +58,15 @@ namespace motion{
 
 class CondensingTX;
 
-class LuxState : public dev::eth::State {
+class MotionState : public dev::eth::State {
     
 public:
 
-    LuxState();
+    MotionState();
 
-    LuxState(dev::u256 const& _accountStartNonce, dev::OverlayDB const& _db, const std::string& _path, dev::eth::BaseState _bs = dev::eth::BaseState::PreExisting);
+    MotionState(dev::u256 const& _accountStartNonce, dev::OverlayDB const& _db, const std::string& _path, dev::eth::BaseState _bs = dev::eth::BaseState::PreExisting);
 
-    ResultExecute execute(dev::eth::EnvInfo const& _envInfo, dev::eth::SealEngineFace const& _sealEngine, LuxTransaction const& _t, dev::eth::Permanence _p = dev::eth::Permanence::Committed, dev::eth::OnOpFunc const& _onOp = OnOpFunc());
+    ResultExecute execute(dev::eth::EnvInfo const& _envInfo, dev::eth::SealEngineFace const& _sealEngine, MotionTransaction const& _t, dev::eth::Permanence _p = dev::eth::Permanence::Committed, dev::eth::OnOpFunc const& _onOp = OnOpFunc());
 
     void setRootUTXO(dev::h256 const& _r) { cacheUTXO.clear(); stateUTXO.setRoot(_r); }
 
@@ -80,9 +80,9 @@ public:
 
     dev::OverlayDB& dbUtxo() { return dbUTXO; }
 
-    static const dev::Address createLuxAddress(dev::h256 hashTx, uint32_t voutNumber);
+    static const dev::Address createMotionAddress(dev::h256 hashTx, uint32_t voutNumber);
 
-    virtual ~LuxState(){}
+    virtual ~MotionState(){}
 
     friend CondensingTX;
 
@@ -119,11 +119,11 @@ private:
 
 
 struct TemporaryState{
-    std::unique_ptr<LuxState>& globalStateRef;
+    std::unique_ptr<MotionState>& globalStateRef;
     dev::h256 oldHashStateRoot;
     dev::h256 oldHashUTXORoot;
 
-    TemporaryState(std::unique_ptr<LuxState>& _globalStateRef) : 
+    TemporaryState(std::unique_ptr<MotionState>& _globalStateRef) : 
         globalStateRef(_globalStateRef),
         oldHashStateRoot(globalStateRef->rootHash()), 
         oldHashUTXORoot(globalStateRef->rootHashUTXO()) {}
@@ -151,7 +151,7 @@ class CondensingTX{
 
 public:
 
-    CondensingTX(LuxState* _state, const std::vector<TransferInfo>& _transfers, const LuxTransaction& _transaction, std::set<dev::Address> _deleteAddresses = std::set<dev::Address>()) : transfers(_transfers), deleteAddresses(_deleteAddresses), transaction(_transaction), state(_state){}
+    CondensingTX(MotionState* _state, const std::vector<TransferInfo>& _transfers, const MotionTransaction& _transaction, std::set<dev::Address> _deleteAddresses = std::set<dev::Address>()) : transfers(_transfers), deleteAddresses(_deleteAddresses), transaction(_transaction), state(_state){}
 
     CTransaction createCondensingTX();
 
@@ -187,9 +187,9 @@ private:
     //So, making this unordered_set could be an attack vector
     const std::set<dev::Address> deleteAddresses;
 
-    const LuxTransaction& transaction;
+    const MotionTransaction& transaction;
 
-    LuxState* state;
+    MotionState* state;
 
     bool voutOverflow = false;
 

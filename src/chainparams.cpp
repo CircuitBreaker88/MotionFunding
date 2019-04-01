@@ -153,7 +153,7 @@ public:
         nMasternodeCountDrift = 20;
         nModifierUpdateBlock = 615800;
 
-        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Lux Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Motion Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1507656633;
@@ -505,7 +505,7 @@ public:
         nModifierUpdateBlock = 615800;
         bech32_hrp = "bcst";
 
-        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Lux Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Motion Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1524645689;

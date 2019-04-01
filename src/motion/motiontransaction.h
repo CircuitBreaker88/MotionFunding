@@ -43,16 +43,16 @@ struct VersionVM{
     }
 }__attribute__((__packed__));
 
-class LuxTransaction : public dev::eth::Transaction{
+class MotionTransaction : public dev::eth::Transaction{
 
 public:
 
-    LuxTransaction() : nVout(0) {}
+    MotionTransaction() : nVout(0) {}
 
-    LuxTransaction(dev::u256 const& _value, dev::u256 const& _gasPrice, dev::u256 const& _gas, dev::bytes const& _data, dev::u256 const& _nonce = dev::Invalid256):
+    MotionTransaction(dev::u256 const& _value, dev::u256 const& _gasPrice, dev::u256 const& _gas, dev::bytes const& _data, dev::u256 const& _nonce = dev::Invalid256):
 		dev::eth::Transaction(_value, _gasPrice, _gas, _data, _nonce) {}
 
-    LuxTransaction(dev::u256 const& _value, dev::u256 const& _gasPrice, dev::u256 const& _gas, dev::Address const& _dest, dev::bytes const& _data, dev::u256 const& _nonce = dev::Invalid256):
+    MotionTransaction(dev::u256 const& _value, dev::u256 const& _gasPrice, dev::u256 const& _gas, dev::Address const& _dest, dev::bytes const& _data, dev::u256 const& _nonce = dev::Invalid256):
 		dev::eth::Transaction(_value, _gasPrice, _gas, _dest, _data, _nonce) {}
 
     void setHashWith(const dev::h256 hash) { m_hashWith = hash; }
