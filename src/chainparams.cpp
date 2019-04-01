@@ -187,7 +187,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0x119a0657590b62232b0f1b6f3a0ba158f43cee79ae92079e6290b9e82e12f6ab"));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        vSeeds.push_back(CDNSSeedData("", ""));       // MOTION seeder
+        vSeeds.push_back(CDNSSeedData("", ""));       // Motion seeder
 
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75); // XMNF address start with 'X'

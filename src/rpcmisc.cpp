@@ -925,7 +925,7 @@ UniValue getaddressbalance(const UniValue& params, bool fHelp)
             "  ]\n"
             "}\n"
             "\nResult: {\n"
-            "  \"balance\",  (number) The current balance (in MOTION satoshis)\n"
+            "  \"balance\",  (number) The current balance (in Motion satoshis)\n"
             "  \"received\", (number) The total amount received (all outputs, including stake)\n"
             "  \"spent\",    (number) The total amount spent (excluding stakes)\n"
             "  \"sent\",     (number) The total amount sent (excl. stakes and amounts sent to same addr.)\n"

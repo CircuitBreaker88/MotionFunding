@@ -70,7 +70,7 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget* pa
     connect(ui->splitBlockCheckBox, SIGNAL(stateChanged(int)), this, SLOT(splitBlockChecked(int)));
     connect(ui->splitBlockLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(splitBlockLineEditChanged(const QString&)));
 
-    // MOTION specific
+    // Motion specific
     QSettings settings;
     if (!settings.contains("bUseDarksend"))
         settings.setValue("bUseDarksend", false);

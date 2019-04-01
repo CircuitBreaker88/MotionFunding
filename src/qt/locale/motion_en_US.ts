@@ -6892,8 +6892,8 @@ https://www.transifex.com/motioncore/motioncore</source>
         <translation>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
     </message>
     <message>
-        <source>Disable all MOTION specific functionality (Masternodes, Darksend, InstanTX, Budgeting) (0-1, default: %u)</source>
-        <translation type="vanished">Disable all MOTION specific functionality (Masternodes, Darksend, InstanTX, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all Motion specific functionality (Masternodes, Darksend, InstanTX, Budgeting) (0-1, default: %u)</source>
+        <translation type="vanished">Disable all Motion specific functionality (Masternodes, Darksend, InstanTX, Budgeting) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>

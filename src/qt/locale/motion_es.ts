@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>MOTION will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your XMNFs from being stolen by malware infecting your computer.</source>
-        <translation type="vanished">MOTION se cerrará ahora para finalizar el proceso de encriptación. Recordad que encriptar vuestra wallet no puede proteger completamente que tus XMNFs sean robados mediante malware infectando tu ordenador.</translation>
+        <translation type="vanished">Motion se cerrará ahora para finalizar el proceso de encriptación. Recordad que encriptar vuestra wallet no puede proteger completamente que tus XMNFs sean robados mediante malware infectando tu ordenador.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>

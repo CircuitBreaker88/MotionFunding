@@ -759,7 +759,7 @@ Cliquer sur &quot;Crypter la clé&quot; pour signer et encrypter la clé privée
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified XMNF addresses</source>
-        <translation>Vérifier les messages afin de s&apos;assurer qu&apos;ils sont signés avec l&apos;adresse MOTION spécifiée</translation>
+        <translation>Vérifier les messages afin de s&apos;assurer qu&apos;ils sont signés avec l&apos;adresse Motion spécifiée</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -5199,7 +5199,7 @@ https://www.transifex.com/motioncore/motioncore</source>
     </message>
     <message>
         <source>To send %1 you need MOTION in address &lt;br /&gt; %2.</source>
-        <translation>Pour envoyer %1 il faut des MOTION sur l&apos;adresse &lt;br /&gt; %2.</translation>
+        <translation>Pour envoyer %1 il faut des Motion sur l&apos;adresse &lt;br /&gt; %2.</translation>
     </message>
     <message>
         <source>Send token</source>

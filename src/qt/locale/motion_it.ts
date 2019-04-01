@@ -441,7 +441,7 @@
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified XMNF address</source>
-        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l&apos;indirizzo MOTION specificato </translation>
+        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l&apos;indirizzo Motion specificato </translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
@@ -739,7 +739,7 @@
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified XMNF addresses</source>
-        <translation>Verifica i messaggi per assicurarsi che siano stati firmati con indirizzi MOTION specifici</translation>
+        <translation>Verifica i messaggi per assicurarsi che siano stati firmati con indirizzi Motion specifici</translation>
     </message>
     <message>
         <source>Encrypt and decrypt private keys using a passphrase</source>

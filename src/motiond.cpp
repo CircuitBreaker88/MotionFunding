@@ -122,7 +122,7 @@ bool AppInit(int argc, char* argv[])
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon) {
-            fprintf(stdout, "MOTION server starting\n");
+            fprintf(stdout, "Motion server starting\n");
 
             // Daemonize
             pid_t pid = fork();
