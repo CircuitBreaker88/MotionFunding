@@ -57,7 +57,7 @@ bool CheckProof(uint256 hash, unsigned int nBits)
 //    timestamp before)
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints = boost::assign::map_list_of
-                ( 0,   uint256("0x000000f071871d171da9017f86d427eb5d3bb3f07eaa6c9226fbdd055785d115") )
+                ( 0,   uint256("0x0000038df03de265d84d9ae463274c1b5d288ab0d79f1e4e3e25e404258f0e04") )
                  ;
 
 static const Checkpoints::CCheckpointData data = {
@@ -169,21 +169,21 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1554159502; //
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 396185;
+        genesis.nNonce = 3153054;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-          while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+        /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
               genesis.nNonce ++;
           }
 
           std::cout << genesis.nNonce << std::endl;
           std::cout << genesis.GetHash().GetHex() << std::endl;
-          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
+          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256("0x000000f071871d171da9017f86d427eb5d3bb3f07eaa6c9226fbdd055785d115"));
+        assert(consensus.hashGenesisBlock == uint256("0x0000038df03de265d84d9ae463274c1b5d288ab0d79f1e4e3e25e404258f0e04"));
         assert(genesis.hashMerkleRoot == uint256("0x119a0657590b62232b0f1b6f3a0ba158f43cee79ae92079e6290b9e82e12f6ab"));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
