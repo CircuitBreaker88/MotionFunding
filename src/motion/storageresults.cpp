@@ -1,4 +1,4 @@
-#include <lux/storageresults.h>
+#include <motion/storageresults.h>
 
 StorageResults::StorageResults(std::string const& _path){
 	path = _path + "/resultsDB";

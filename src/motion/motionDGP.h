@@ -1,7 +1,7 @@
 #ifndef LUXDGP_H
 #define LUXDGP_H
 
-#include "luxstate.h"
+#include "motionstate.h"
 #include "primitives/block.h"
 #include "main.h"
 #include "utilstrencodings.h"

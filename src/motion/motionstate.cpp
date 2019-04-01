@@ -1,7 +1,7 @@
 #include <sstream>
 #include <util.h>
 #include <main.h>
-#include "luxstate.h"
+#include "motionstate.h"
 
 using namespace std;
 using namespace dev;
@@ -9,7 +9,7 @@ using namespace dev::eth;
 
 LuxState::LuxState(u256 const& _accountStartNonce, OverlayDB const& _db, const string& _path, BaseState _bs) :
         State(_accountStartNonce, _db, _bs) {
-            dbUTXO = LuxState::openDB(_path + "/luxDB", sha3(rlp("")), WithExisting::Trust);
+            dbUTXO = LuxState::openDB(_path + "/motionDB", sha3(rlp("")), WithExisting::Trust);
 	        stateUTXO = SecureTrieDB<Address, OverlayDB>(&dbUTXO);
 }
 
@@ -78,7 +78,7 @@ ResultExecute LuxState::execute(EnvInfo const& _envInfo, SealEngineFace const& _
                 printfErrorLog(res.excepted);
             }
 
-            lux::commit(cacheUTXO, stateUTXO, m_cache);
+            motion::commit(cacheUTXO, stateUTXO, m_cache);
             cacheUTXO.clear();
             bool removeEmptyAccounts = _envInfo.number() >= _sealEngine.chainParams().u256Param("EIP158ForkBlock");
             commit(removeEmptyAccounts ? State::CommitBehaviour::RemoveEmptyAccounts : State::CommitBehaviour::KeepEmptyAccounts);
@@ -176,7 +176,7 @@ Vin* LuxState::vin(dev::Address const& _addr)
 //     if (_commitBehaviour == CommitBehaviour::RemoveEmptyAccounts)
 //         removeEmptyAccounts();
 
-//     lux::commit(cacheUTXO, stateUTXO, m_cache);
+//     motion::commit(cacheUTXO, stateUTXO, m_cache);
 //     cacheUTXO.clear();
 
 //     m_touched += dev::eth::commit(m_cache, m_state);
