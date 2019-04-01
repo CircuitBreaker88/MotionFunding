@@ -28,7 +28,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::MOTION)
+    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::XMNF)
     {
     }
 
