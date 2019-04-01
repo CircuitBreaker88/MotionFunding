@@ -179,7 +179,7 @@ public:
 
           std::cout << genesis.nNonce << std::endl;
           std::cout << genesis.GetHash().GetHex() << std::endl;
-          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; 
+          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -203,10 +203,10 @@ public:
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
-        fMiningRequiresPeers = true;
+        fMiningRequiresPeers = false;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
-        fMineBlocksOnDemand = false;
+        fMineBlocksOnDemand = true;
         fSkipProofOfWorkCheck = false;
         fTestnetToBeDeprecatedFieldRPC = false;
         fHeadersFirstSyncingActive = false;
