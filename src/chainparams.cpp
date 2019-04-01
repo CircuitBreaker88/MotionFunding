@@ -173,7 +173,7 @@ public:
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-          while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+        /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
               genesis.nNonce ++;
           }
 
@@ -181,7 +181,7 @@ public:
           std::cout << genesis.GetHash().GetHex() << std::endl;
           std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
-        consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = genesis.GetHash(); */
 
         assert(consensus.hashGenesisBlock == uint256("0x000000f071871d171da9017f86d427eb5d3bb3f07eaa6c9226fbdd055785d115"));
         assert(genesis.hashMerkleRoot == uint256("0x119a0657590b62232b0f1b6f3a0ba158f43cee79ae92079e6290b9e82e12f6ab"));
@@ -288,17 +288,17 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1554159502; // 14 June 2018 @ 5:37am (UTC)
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 1;
+        genesis.nNonce = 30111;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+      /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
             genesis.nNonce ++;
         }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         nSwitchPhi2Block = 1000;
         nSplitRewardBlock = 1500;
@@ -308,8 +308,8 @@ public:
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256("0x00000b773a72afd051c6fe34c6d9c8e1ba78b1556263c807a1ca7d7a200cda82"));
-        assert(genesis.hashMerkleRoot == uint256("0xd158bc48409667ffc5c66829d53aa6d1f241ce4984f54d8685b16d234ef78b3f"));
+        assert(consensus.hashGenesisBlock == uint256("0x00000be203eaf359c708ffbeeb9ff17b9d33f73dee52e1e42b9d3303c14da93e"));
+        assert(genesis.hashMerkleRoot == uint256("0x676742e908d37010c5768fe40b7d9b68f29e44d657949c202a16796e57516639"));
 
         //vFixedSeeds.clear();
         //vSeeds.clear();
@@ -525,13 +525,13 @@ public:
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 1;
 
-      /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
             genesis.nNonce ++;
         }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
