@@ -523,20 +523,20 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1554159502;
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 1;
+        genesis.nNonce = 3124327;
 
-        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+    /*    while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
             genesis.nNonce ++;
         }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256("0x00000a1a2a728145f14f873037b5f4188c1b36d20f8187d329e412b97cdbaabf"));
-        assert(genesis.hashMerkleRoot == uint256("0xb35719fbe3e4d52f06d791e938de406d48defadb83beeb1fdd10c7ef52a481c2"));
+        assert(consensus.hashGenesisBlock == uint256("0x0000087d8619c209d5696fbff5f0664f2a81b63f6618618c1a11e073f00443e7"));
+        assert(genesis.hashMerkleRoot == uint256("0xe403268eb1bf870a08a39289b6086f1cf20c6d5bb552fbc43433b6ee458fd337"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // XMNF Start letter L
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,64);
