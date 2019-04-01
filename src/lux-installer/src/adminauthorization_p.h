@@ -1,9 +1,9 @@
-#ifndef QTLUXUPDATER_ADMINAUTHORIZATION_P_H
-#define QTLUXUPDATER_ADMINAUTHORIZATION_P_H
+#ifndef QTMOTIONUPDATER_ADMINAUTHORIZATION_P_H
+#define QTMOTIONUPDATER_ADMINAUTHORIZATION_P_H
 
-#include "luxupdater/adminauthoriser.h"
+#include "motionupdater/adminauthoriser.h"
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 class AdminAuthorization : public AdminAuthoriser
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // QTLUXUPDATER_ADMINAUTHORIZATION_P_H
+#endif // QTMOTIONUPDATER_ADMINAUTHORIZATION_P_H

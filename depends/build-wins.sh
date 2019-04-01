@@ -1,6 +1,6 @@
 #!/bin/sh
 #-###############################################-#
-# C++ Cross-Compiler - The Luxcore Developer-2018 #
+# C++ Cross-Compiler - The Motion Developer-2018 #
 #-###############################################-#
 
 # Set platform variables
@@ -80,9 +80,9 @@ RELEASE="$OLD_PATH/Release"
 mkdir -p "$RELEASE"
 
 # Remove the symbols for release
-[ -f "./src/qt/lux-qt.exe" ] && cp "./src/qt/lux-qt.exe" "$RELEASE"
-[ -f "./src/luxd.exe" ] && cp "./src/luxd.exe" "$RELEASE"
-[ -f "./src/lux-cli.exe" ] && cp "./src/lux-cli.exe" "$RELEASE"
+[ -f "./src/qt/motion-qt.exe" ] && cp "./src/qt/motion-qt.exe" "$RELEASE"
+[ -f "./src/motiond.exe" ] && cp "./src/motiond.exe" "$RELEASE"
+[ -f "./src/motion-cli.exe" ] && cp "./src/motion-cli.exe" "$RELEASE"
 
 
 cd "$RELEASE"

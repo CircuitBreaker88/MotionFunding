@@ -1,10 +1,10 @@
-#ifndef LUXUPDATER_ADMINAUTHORISER_H
-#define LUXUPDATER_ADMINAUTHORISER_H
+#ifndef MOTIONUPDATER_ADMINAUTHORISER_H
+#define MOTIONUPDATER_ADMINAUTHORISER_H
 
 #include <QtCore/qstring.h>
 #include <QtCore/qstringlist.h>
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 //! An interface to run programs with elevated rights
@@ -20,4 +20,4 @@ public:
 
 }
 
-#endif // LUXUPDATER_ADMINAUTHORISER_H
+#endif // MOTIONUPDATER_ADMINAUTHORISER_H

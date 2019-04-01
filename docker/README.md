@@ -1,4 +1,4 @@
-Quick Docker image for luxd
+Quick Docker image for motiond
 ---------------------------
 
 Build docker image:
@@ -9,41 +9,41 @@ Push docker image:
 
     docker/push.sh
 
-Pull luxcore/lux:latest from docker hub  at [lux-dockerhub](https://hub.docker.com/r/luxcore/lux/)
+Pull motioncore/motion:latest from docker hub  at [motion-dockerhub](https://hub.docker.com/r/motioncore/motion/)
 
-    sudo docker pull luxcore/lux
+    sudo docker pull motioncore/motion
     
 Run docker image
 
-    sudo docker run luxcore/lux
+    sudo docker run motioncore/motion
 
-Build docker for luxd
+Build docker for motiond
 ----------
-A Docker configuration with luxd node by default.
+A Docker configuration with motiond node by default.
 
     sudo apt install apt-transport-https ca-certificates curl software-properties-common; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -; sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; sudo apt-get update; sudo apt install docker-ce   
 ---------------------------------------------------        
     
-    mkdir lux-mounted-data
-    docker run --name lux -d \
-     --env 'LUX_RPCUSER=rpciser' \
-     --env 'LUX_RPCPASSWORD=rpcpassword' \
-     --env 'LUX_TXINDEX=1' \
-     --volume ~/lux-mounted-data:~/.lux \
+    mkdir motion-mounted-data
+    docker run --name motion -d \
+     --env 'MOTION_RPCUSER=rpciser' \
+     --env 'MOTION_RPCPASSWORD=rpcpassword' \
+     --env 'MOTION_TXINDEX=1' \
+     --volume ~/motion-mounted-data:~/.motion \
      -p 9888:9888 \
      --publish 9888:9888 \
-     luxcore/lux
+     motioncore/motion
 ----------------------------------------------------
 Logs
 
-    docker logs -f lux
+    docker logs -f motion
 
 ----------------------------------------------------
 
 ## Configuration
 
-Set your `lux.conf` file can be placed in the `lux-mounted data` dir.
-Otherwise, a default `lux.conf` file will be automatically generated based
+Set your `motion.conf` file can be placed in the `motion-mounted data` dir.
+Otherwise, a default `motion.conf` file will be automatically generated based
 on environment variables passed to the container:
 
 | name | default |
@@ -70,23 +70,23 @@ If you're daemonizing is to use Docker's
 but if you're insistent on using systemd, you could do something like
 
 ```
-$ cat /etc/systemd/system/luxd.service
+$ cat /etc/systemd/system/motiond.service
 
-# luxd.service #######################################################################
+# motiond.service #######################################################################
 [Unit]
-Description=Lux
+Description=Motion
 After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStartPre=-/usr/bin/docker kill lux
-ExecStartPre=-/usr/bin/docker rm lux
-ExecStartPre=/usr/bin/docker pull luxcore/lux
+ExecStartPre=-/usr/bin/docker kill motion
+ExecStartPre=-/usr/bin/docker rm motion
+ExecStartPre=/usr/bin/docker pull motioncore/motion
 ExecStart=/usr/bin/docker run \
-    --name lux \
+    --name motion \
     -p 9888:9888 \
     -p 9888:9888 \
-    -v /data/luxd:/root/.lux \
-    luxcore/lux
-ExecStop=/usr/bin/docker stop lux
+    -v /data/motiond:/root/.motion \
+    motioncore/motion
+ExecStop=/usr/bin/docker stop motion
 ```

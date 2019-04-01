@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#define NEW_RELEASES "https://github.com/LUX-Core/lux/releases"
+#define NEW_RELEASES "https://github.com/Motion-Core/motion/releases"
 
 class Version {
 

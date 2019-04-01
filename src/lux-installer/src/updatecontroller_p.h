@@ -1,26 +1,26 @@
-#ifndef QTLUXUPDATER_UPDATECONTROLLER_P_H
-#define QTLUXUPDATER_UPDATECONTROLLER_P_H
+#ifndef QTMOTIONUPDATER_UPDATECONTROLLER_P_H
+#define QTMOTIONUPDATER_UPDATECONTROLLER_P_H
 
 #include "updatecontroller.h"
 #include "updateinfodialog_p.h"
 #include "progressdialog_p.h"
 
-#include "luxupdater/luxupdater.h"
+#include "motionupdater/motionupdater.h"
 #include "updatecontroller.h"
-#include "luxupdater/simplescheduler_p.h"
+#include "motionupdater/simplescheduler_p.h"
 
 #include <QtCore/QPointer>
 #include <atomic>
 
-extern QtLuxUpdater::ProgressDialog *gUpdatesProgress;
+extern QtMotionUpdater::ProgressDialog *gUpdatesProgress;
 extern std::atomic<bool> running;
 extern std::atomic<bool> wasCanceled;
 extern QPointer<QWidget> win;
-extern QtLuxUpdater::UpdateController::DisplayLevel gDisplayLevel;
+extern QtMotionUpdater::UpdateController::DisplayLevel gDisplayLevel;
 extern std::atomic<bool> isUpdaterRunning;
 
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 class UpdateControllerPrivate
@@ -34,7 +34,7 @@ public:
 
 	QPointer<QWidget> window;
 
-	LuxUpdater *mainUpdater;
+	MotionUpdater *mainUpdater;
 	bool runAdmin;
 	bool adminUserEdit;
 	QStringList runArgs;
@@ -51,4 +51,4 @@ public:
 
 }
 
-#endif // QTLUXUPDATER_UPDATECONTROLLER_P_H
+#endif // QTMOTIONUPDATER_UPDATECONTROLLER_P_H

@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The Luxcore developers
+// Copyright (c) 2015-2018 The Motion Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 #define BITCOIN_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/lux-config.h"
+#include "config/motion-config.h"
 #endif
 
 #include "amount.h"
@@ -42,20 +42,20 @@
 #include <boost/unordered_map.hpp>
 
 /**
- * Global LuxState
+ * Global MotionState
  */
 
-/////////////////////////////////////////// lux
-#include <lux/luxstate.h>
-#include <lux/luxDGP.h>
+/////////////////////////////////////////// motion
+#include <motion/motionstate.h>
+#include <motion/motionDGP.h>
 #include <libethereum/ChainParams.h>
 #include <libethashseal/Ethash.h>
 #include <libethashseal/GenesisInfo.h>
 #include <script/standard.h>
-#include <lux/storageresults.h>
+#include <motion/storageresults.h>
 ///////////////////////////////////////////
 
-extern std::unique_ptr<LuxState> globalState;
+extern std::unique_ptr<MotionState> globalState;
 extern std::shared_ptr<dev::eth::SealEngineFace> globalSealEngine;
 extern bool fRecordLogOpcodes;
 extern bool fIsVMlogFile;
@@ -63,7 +63,7 @@ extern bool fGettingValuesDGP;
 
 struct EthTransactionParams;
 using valtype = std::vector<unsigned char>;
-using ExtractLuxTX = std::pair<std::vector<LuxTransaction>, std::vector<EthTransactionParams>>;
+using ExtractMotionTX = std::pair<std::vector<MotionTransaction>, std::vector<EthTransactionParams>>;
 ///////////////////////////////////////////
 
 class CBlockIndex;
@@ -91,14 +91,14 @@ struct CNodeStateStats;
 #endif
 
 #ifndef WORKING_VERSION
-#define WORKING_VERSION "/Luxcore:5.3.0/"
+#define WORKING_VERSION "/Motion :5.3.0/"
 #endif
 
-static const int64_t DARKSEND_COLLATERAL = (16120*COIN); //16120 LUX
+static const int64_t DARKSEND_COLLATERAL = (16120*COIN); //16120 XMNF
 static const int64_t DARKSEND_FEE = (0.002*COIN); // reward masternode
 static const int64_t DARKSEND_POOL_MAX = (1999999.99*COIN);
 
-static const int nLuxProtocolSwitchHeight = 580000;
+static const int nMotionProtocolSwitchHeight = 580000;
 
 /** The maximum size for mined blocks */
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_BASE_SIZE/2;
@@ -164,7 +164,7 @@ static const int64_t STATIC_POS_REWARD = 1 * COIN; //Constant reward 8%
 
 static const bool DEFAULT_LOGEVENTS = false;
 
-////////////////////////////////////////////////////// lux
+////////////////////////////////////////////////////// motion
 static const uint64_t DEFAULT_GAS_LIMIT_OP_CREATE=2500000;
 static const uint64_t DEFAULT_GAS_LIMIT_OP_SEND=250000;
 static const CAmount DEFAULT_GAS_PRICE=0.00000040*COIN;
@@ -184,7 +184,7 @@ extern unsigned int dgpMaxBlockWeight;
 /** The maximum allowed size for a block excluding witness data, in bytes (network rule) */
 extern unsigned int dgpMaxBlockBaseSize;
 
-extern unsigned int dgpMaxBlockSize; // lux
+extern unsigned int dgpMaxBlockSize; // motion
 
 /** The maximum allowed number of signature check operations in a block (network rule) */
 extern int64_t dgpMaxBlockSigOps;
@@ -387,7 +387,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
 bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee = false, bool isDSTX = false);
 
 
-//////////////////////////////////////////////////////////// // lux
+//////////////////////////////////////////////////////////// // motion
 struct CHeightTxIndexIteratorKey {
     unsigned int height;
 
@@ -855,7 +855,7 @@ static const unsigned int REJECT_CONFLICT = 0x102;
 
 int GetSpendHeight(const CCoinsViewCache& inputs);
 
-//////////////////////////////////////////////////////// lux
+//////////////////////////////////////////////////////// motion
 std::vector<ResultExecute> CallContract(const dev::Address& addrContract, std::vector<unsigned char> opcode, const dev::Address& sender = dev::Address(), uint64_t gasLimit=0);
 
 bool CheckSenderScript(const CCoinsViewCache& view, const CTransaction& tx);
@@ -891,13 +891,13 @@ struct ByteCodeExecResult{
     std::vector<CTransaction> valueTransfers;
 };
 
-class LuxTxConverter{
+class MotionTxConverter{
 
 public:
 
-    LuxTxConverter(CTransaction tx, CCoinsViewCache* v = NULL, const std::vector<CTransaction>* blockTxs = NULL) : txBit(tx), view(v), blockTransactions(blockTxs){}
+    MotionTxConverter(CTransaction tx, CCoinsViewCache* v = NULL, const std::vector<CTransaction>* blockTxs = NULL) : txBit(tx), view(v), blockTransactions(blockTxs){}
 
-    bool extractionLuxTransactions(ExtractLuxTX& luxTx);
+    bool extractionMotionTransactions(ExtractMotionTX& motionTx);
 
 private:
 
@@ -905,7 +905,7 @@ private:
 
     bool parseEthTXParams(EthTransactionParams& params);
 
-    LuxTransaction createEthTX(const EthTransactionParams& etp, const uint32_t nOut);
+    MotionTransaction createEthTX(const EthTransactionParams& etp, const uint32_t nOut);
 
     const CTransaction txBit;
     const CCoinsViewCache* view;
@@ -919,7 +919,7 @@ class ByteCodeExec {
 
 public:
 
-    ByteCodeExec(const CBlock& _block, std::vector<LuxTransaction> _txs, const uint64_t _blockGasLimit) : txs(_txs), block(_block), blockGasLimit(_blockGasLimit) {}
+    ByteCodeExec(const CBlock& _block, std::vector<MotionTransaction> _txs, const uint64_t _blockGasLimit) : txs(_txs), block(_block), blockGasLimit(_blockGasLimit) {}
 
     bool performByteCode(dev::eth::Permanence type = dev::eth::Permanence::Committed);
 
@@ -933,7 +933,7 @@ private:
 
     dev::Address EthAddrFromScript(const CScript& scriptIn);
 
-    std::vector<LuxTransaction> txs;
+    std::vector<MotionTransaction> txs;
 
     std::vector<ResultExecute> result;
 

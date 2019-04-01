@@ -1,4 +1,4 @@
-Building LUX
+Building MOTION
 
 Use the autogen script to prepare the build environment.
 
@@ -8,6 +8,6 @@ Use the autogen script to prepare the build environment.
 
 Always verify the signatures and checksums.
 
-See doc/build-*.md for instructions on building luxd,
+See doc/build-*.md for instructions on building motiond,
 the intended-for-services, no-graphical-interface, reference
-implementation of LUX.
+implementation of MOTION.

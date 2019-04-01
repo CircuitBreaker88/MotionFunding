@@ -1,7 +1,7 @@
-#ifndef QTLUXUPDATER_UPDATEINFODIALOG_H
-#define QTLUXUPDATER_UPDATEINFODIALOG_H
+#ifndef QTMOTIONUPDATER_UPDATEINFODIALOG_H
+#define QTMOTIONUPDATER_UPDATEINFODIALOG_H
 
-#include "luxupdater/luxupdater.h"
+#include "motionupdater/motionupdater.h"
 
 #include <QDialog>
 
@@ -9,7 +9,7 @@ namespace Ui {
 class UpdateInfoDialog;
 }
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 class UpdateInfoDialog : public QDialog
@@ -24,7 +24,7 @@ public:
 	};
 	Q_ENUM(DialogResult)
 
-	static DialogResult showUpdateInfo(QList<LuxUpdater::LuxUpdateInfo> updates,
+	static DialogResult showUpdateInfo(QList<MotionUpdater::MotionUpdateInfo> updates,
 									   bool &runAsAdmin,
 									   bool editable,
 									   bool detailed,
@@ -45,4 +45,4 @@ private:
 
 }
 
-#endif // QTLUXUPDATER_UPDATEINFODIALOG_H
+#endif // QTMOTIONUPDATER_UPDATEINFODIALOG_H

@@ -1,9 +1,9 @@
 
-cp src/luxd .
-cp src/qt/lux-qt .
-strip luxd
-strip lux-qt
-zip release_${LUX_PLATFORM}.zip luxd lux-qt
+cp src/motiond .
+cp src/qt/motion-qt .
+strip motiond
+strip motion-qt
+zip release_${MOTION_PLATFORM}.zip motiond motion-qt
 
 sudo easy_install appscript
 

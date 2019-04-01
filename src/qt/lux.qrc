@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="bitcoin">res/icons/bitcoin.png</file>
-        <file alias="luxcoin_black">res/icons/luxcoin_black.png</file>
+        <file alias="motioncoin_black">res/icons/motioncoin_black.png</file>
         <file alias="warning">res/icons/warning.png</file>
         <file alias="address-book">res/icons/address-book.png</file>
         <file alias="quit">res/icons/quit.png</file>
         <file alias="update">res/icons/update.ico</file>
         <file alias="update_black">res/icons/update_black.png</file>
         <file alias="network_monitor">res/icons/network_monitor.png</file>
-        <file alias="luxupdate-loader">res/icons/luxupdate-loader.gif</file>
+        <file alias="motionupdate-loader">res/icons/motionupdate-loader.gif</file>
         <file alias="send">res/icons/send.png</file>
         <file alias="conf">res/icons/conf.png</file>
         <file alias="auto_backup">res/icons/auto_backup.png</file>
@@ -56,12 +56,12 @@
         <file alias="tx_input">res/icons/tx_input.png</file>
         <file alias="tx_output">res/icons/tx_output.png</file>
         <file alias="tx_inout">res/icons/tx_inout.png</file>
-        <file alias="unit_lux">res/icons/unit_lux.png</file>
-        <file alias="unit_mlux">res/icons/unit_mlux.png</file>
-        <file alias="unit_ulux">res/icons/unit_ulux.png</file>
-        <file alias="unit_tlux">res/icons/unit_tlux.png</file>
-        <file alias="unit_tmlux">res/icons/unit_tmlux.png</file>
-        <file alias="unit_tulux">res/icons/unit_tulux.png</file>
+        <file alias="unit_motion">res/icons/unit_motion.png</file>
+        <file alias="unit_mmotion">res/icons/unit_mmotion.png</file>
+        <file alias="unit_umotion">res/icons/unit_umotion.png</file>
+        <file alias="unit_tmotion">res/icons/unit_tmotion.png</file>
+        <file alias="unit_tmmotion">res/icons/unit_tmmotion.png</file>
+        <file alias="unit_tumotion">res/icons/unit_tumotion.png</file>
         <file alias="lock_closed">res/icons/lock_closed.png</file>
         <file alias="lock_closed_black">res/icons/lock_closed_black.png</file>
         <file alias="lock_open">res/icons/lock_open.png</file>
@@ -90,7 +90,7 @@
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>
-        <file alias="lux_logo_horizontal">res/images/lux_logo_horizontal.png</file>
+        <file alias="motion_logo_horizontal">res/images/motion_logo_horizontal.png</file>
         <file alias="downArrow">res/images/downArrow.png</file>
         <file alias="downArrow_small">res/images/downArrow_small.png</file>
         <file alias="upArrow_small">res/images/upArrow_small.png</file>

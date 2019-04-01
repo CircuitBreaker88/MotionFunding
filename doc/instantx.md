@@ -11,9 +11,9 @@ When a "Transaction Lock" occurs the hash of the related transaction is broadcas
 * `zmqpubrawtxlock`: publishes the raw transaction when locked via InstanTX
 * `zmqpubhashtxlock`: publishes the transaction hash when locked via InstanTX
 
-This mechanism has been integrated into Bitcore-Node-LUX which allows for notification to be broadcast through Insight API in one of two ways:
-* WebSocket: [https://github.com/LUX-Project/insight-api-lux#web-socket-api](https://github.com/LUX-Project/insight-api-lux#web-socket-api) 
-* API: [https://github.com/LUX-Project/insight-api-lux#instantx-transactions](https://github.com/LUX-Project/insight-api-lux#instantx-transactions)
+This mechanism has been integrated into Bitcore-Node-MOTION which allows for notification to be broadcast through Insight API in one of two ways:
+* WebSocket: [https://github.com/MOTION-Project/insight-api-motion#web-socket-api](https://github.com/MOTION-Project/insight-api-motion#web-socket-api) 
+* API: [https://github.com/MOTION-Project/insight-api-motion#instantx-transactions](https://github.com/MOTION-Project/insight-api-motion#instantx-transactions)
 
 ####Command line option
 
@@ -27,13 +27,13 @@ When a wallet InstanTX transaction is successfully locked a shell command provid
 
 Details pertaining to an observed "Transaction Lock" can also be retrieved through RPC, it’s important however to understand the underlying mechanism.
 
-By default, the Luxcore daemon will launch using the following constant:
+By default, the Motion Core daemon will launch using the following constant:
 
 ```
 static const int DEFAULT_INSTANTX_DEPTH = 5;
 ```
 
-This value can be overridden by passing the following argument to the Luxcore daemon:
+This value can be overridden by passing the following argument to the Motion Core daemon:
 
 ```
 -instantxdepth=<n>

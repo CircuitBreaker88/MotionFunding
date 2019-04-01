@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The LUX developers
+// Copyright (c) 2015-2017 The Motion Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,7 +28,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::LUX)
+    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::MOTION)
     {
     }
 
@@ -136,10 +136,10 @@ SmartContractPage::SmartContractPage(QWidget* parent) : QWidget(parent),
             ui->darksendReset->setText("(" + tr("Disabled") + ")");
             ui->frameDarksend->setEnabled(false);
         } else {
-            if (!fEnableLuxsend) {
-                ui->toggleDarksend->setText(tr("Start Luxsend"));
+            if (!fEnableMotionsend) {
+                ui->toggleDarksend->setText(tr("Start Motionsend"));
             } else {
-                ui->toggleDarksend->setText(tr("Stop Luxsend"));
+                ui->toggleDarksend->setText(tr("Stop Motionsend"));
             }
             timer = new QTimer(this);
             connect(timer, SIGNAL(timeout()), this, SLOT(darkSendStatus()));
@@ -266,7 +266,7 @@ void SmartContractPage::setWalletModel(WalletModel* model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("LUX")
+    // update the display unit, to not use the default ("MOTION")
     updateDisplayUnit();
 }
 
@@ -310,7 +310,7 @@ void SmartContractPage::updateDarkSendProgress()
     }
 
     QString strAmountAndRounds;
-    QString strAnonymizeLuxAmount = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nAnonymizeLuxAmount * COIN, false, BitcoinUnits::separatorAlways);
+    QString strAnonymizeMotionAmount = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nAnonymizeMotionAmount * COIN, false, BitcoinUnits::separatorAlways);
 
     if (!fEnableDarksend) {
         ui->darksendProgress->setValue(0);
@@ -325,8 +325,8 @@ void SmartContractPage::updateDarkSendProgress()
         ui->darksendProgress->setToolTip(tr("No inputs detected"));
 
         // when balance is zero just show info from settings
-        strAnonymizeLuxAmount = strAnonymizeLuxAmount.remove(strAnonymizeLuxAmount.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
-        strAmountAndRounds = strAnonymizeLuxAmount + " / " + tr("%n Rounds", "", nDarksendRounds);
+        strAnonymizeMotionAmount = strAnonymizeMotionAmount.remove(strAnonymizeMotionAmount.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
+        strAmountAndRounds = strAnonymizeMotionAmount + " / " + tr("%n Rounds", "", nDarksendRounds);
 
         ui->labelAmountRounds->setToolTip(tr("No inputs detected"));
         ui->labelAmountRounds->setText(strAmountAndRounds);
@@ -353,20 +353,20 @@ void SmartContractPage::updateDarkSendProgress()
     CAmount nMaxToAnonymize = nAnonymizableBalance + currentAnonymizedBalance + nDenominatedUnconfirmedBalance;
 
     // If it's more than the anon threshold, limit to that.
-    if (nMaxToAnonymize > nAnonymizeLuxAmount * COIN) nMaxToAnonymize = nAnonymizeLuxAmount * COIN;
+    if (nMaxToAnonymize > nAnonymizeMotionAmount * COIN) nMaxToAnonymize = nAnonymizeMotionAmount * COIN;
 
     if (nMaxToAnonymize == 0) return;
 
-    if (nMaxToAnonymize >= nAnonymizeLuxAmount * COIN) {
+    if (nMaxToAnonymize >= nAnonymizeMotionAmount * COIN) {
         ui->labelAmountRounds->setToolTip(tr("Found enough compatible inputs to anonymize %1")
-                                              .arg(strAnonymizeLuxAmount));
-        strAnonymizeLuxAmount = strAnonymizeLuxAmount.remove(strAnonymizeLuxAmount.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
-        strAmountAndRounds = strAnonymizeLuxAmount + " / " + tr("%n Rounds", "", nDarksendRounds);
+                                              .arg(strAnonymizeMotionAmount));
+        strAnonymizeMotionAmount = strAnonymizeMotionAmount.remove(strAnonymizeMotionAmount.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
+        strAmountAndRounds = strAnonymizeMotionAmount + " / " + tr("%n Rounds", "", nDarksendRounds);
     } else {
         QString strMaxToAnonymize = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nMaxToAnonymize, false, BitcoinUnits::separatorAlways);
         ui->labelAmountRounds->setToolTip(tr("Not enough compatible inputs to anonymize <span style='color:red;'>%1</span>,<br>"
                                              "will anonymize <span style='color:red;'>%2</span> instead")
-                                              .arg(strAnonymizeLuxAmount)
+                                              .arg(strAnonymizeMotionAmount)
                                               .arg(strMaxToAnonymize));
         strMaxToAnonymize = strMaxToAnonymize.remove(strMaxToAnonymize.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = "<span style='color:red;'>" +
@@ -434,7 +434,7 @@ void SmartContractPage::darkSendStatus()
     //if (((nBestHeight - obfuscationPool.cachedNumBlocks) / (GetTimeMillis() - nLastDSProgressBlockTime + 1) > 1)) return;
     nLastDSProgressBlockTime = GetTimeMillis();
 
-    if (!fEnableLuxsend) {
+    if (!fEnableMotionsend) {
         if (nBestHeight != darksendPool.cachedNumBlocks) {
             darksendPool.cachedNumBlocks = nBestHeight;
             updateDarkSendProgress();
@@ -506,7 +506,7 @@ void SmartContractPage::toggleDarksend()
             QMessageBox::Ok, QMessageBox::Ok);
         settings.setValue("hasMixed", "hasMixed");
     }
-    if (!fEnableLuxsend) {
+    if (!fEnableMotionsend) {
         int64_t balance = currentBalance;
         float minAmount = 14.90 * COIN;
         if (balance < minAmount) {
@@ -532,10 +532,10 @@ void SmartContractPage::toggleDarksend()
         }
     }
 
-    fEnableLuxsend = !fEnableLuxsend;
+    fEnableMotionsend = !fEnableMotionsend;
     darksendPool.cachedNumBlocks = std::numeric_limits<int>::max();
 
-    if (!fEnableLuxsend) {
+    if (!fEnableMotionsend) {
         ui->toggleDarksend->setText(tr("Start Darksend"));
         darksendPool.UnlockCoins();
     } else {
@@ -543,7 +543,7 @@ void SmartContractPage::toggleDarksend()
 
         /* show obfuscation configuration if client has defaults set */
 
-        if (nAnonymizeLuxAmount == 0) {
+        if (nAnonymizeMotionAmount == 0) {
             DarksendConfig dlg(this);
             dlg.setModel(walletModel);
             dlg.exec();

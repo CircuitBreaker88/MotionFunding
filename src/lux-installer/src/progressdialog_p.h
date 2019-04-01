@@ -1,5 +1,5 @@
-#ifndef QTLUXUPDATER_PROGRESSDIALOG_P_H
-#define QTLUXUPDATER_PROGRESSDIALOG_P_H
+#ifndef QTMOTIONUPDATER_PROGRESSDIALOG_P_H
+#define QTMOTIONUPDATER_PROGRESSDIALOG_P_H
 
 #include <QScopedPointer>
 
@@ -16,7 +16,7 @@ namespace Ui {
 class ProgressDialog;
 }
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 class ProgressDialog : public QDialog
@@ -65,4 +65,4 @@ private:
 
 }
 
-#endif // QTLUXUPDATER_PROGRESSDIALOG_P_H
+#endif // QTMOTIONUPDATER_PROGRESSDIALOG_P_H

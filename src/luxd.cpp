@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The LUX developers
+// Copyright (c) 2015-2017 The Motion Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -29,8 +29,8 @@
  *
  * \section intro_sec Introduction
  *
- * This is the developer documentation of the reference client for an experimental new digital currency called LUX (http://www.luxcore.io),
- * which enables instant payments to anyone, anywhere in the world. LUX uses peer-to-peer technology to operate
+ * This is the developer documentation of the reference client for an experimental new digital currency called MOTION (http://www.motioncore.io),
+ * which enables instant payments to anyone, anywhere in the world. MOTION uses peer-to-peer technology to operate
  * with no central authority: managing transactions and issuing money are carried out collectively by the network.
  *
  * The software is a community-driven open source project, released under the MIT license.
@@ -63,18 +63,18 @@ bool AppInit(int argc, char* argv[])
     //
     // Parameters
     //
-    // If Qt is used, parameters/lux.conf are parsed in qt/lux.cpp's main()
+    // If Qt is used, parameters/motion.conf are parsed in qt/motion.cpp's main()
     ParseParameters(argc, argv);
 
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-h") ||  mapArgs.count("-help") || mapArgs.count("-version")) {
-        std::string strUsage = _("Luxcore Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("Motion Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version")) {
             strUsage += LicenseInfo();
         } else {
             strUsage += "\n" + _("Usage:") + "\n" +
-                        "  luxd [options]                     " + _("Start Luxcore Daemon") + "\n";
+                        "  motiond [options]                     " + _("Start Motion Core Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -112,17 +112,17 @@ bool AppInit(int argc, char* argv[])
         // Command-line RPC
         bool fCommandLine = false;
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "lux:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "motion:"))
                 fCommandLine = true;
 
         if (fCommandLine) {
-            fprintf(stderr, "Error: There is no RPC client functionality in luxd anymore. Use the lux-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in motiond anymore. Use the motion-cli utility instead.\n");
             exit(1);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon) {
-            fprintf(stdout, "LUX server starting\n");
+            fprintf(stdout, "MOTION server starting\n");
 
             // Daemonize
             pid_t pid = fork();
@@ -164,7 +164,7 @@ int main(int argc, char* argv[])
 {
     SetupEnvironment();
 
-    // Connect luxd signal handlers
+    // Connect motiond signal handlers
     noui_connect();
 
     return (AppInit(argc, argv) ? 0 : 1);

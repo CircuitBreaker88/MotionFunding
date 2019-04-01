@@ -39,7 +39,7 @@
 #include <QtCore/QDir>
 #include <QtCore/qt_windows.h>
 
-using namespace QtLuxUpdater;
+using namespace QtMotionUpdater;
 
 static QString qt_create_commandline(const QStringList &arguments);
 

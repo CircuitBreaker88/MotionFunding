@@ -1,25 +1,25 @@
-# /etc/conf.d/luxd: config file for /etc/init.d/luxd
+# /etc/conf.d/motiond: config file for /etc/init.d/motiond
 
 # Config file location
-#BITCOIND_CONFIGFILE="/etc/lux/lux.conf"
+#BITCOIND_CONFIGFILE="/etc/motion/motion.conf"
 
 # What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
-#BITCOIND_PIDDIR="/var/run/luxd"
+#BITCOIND_PIDDIR="/var/run/motiond"
 
 # What filename to give the pidfile
-#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/luxd.pid"
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/motiond.pid"
 
-# Where to write luxd data (be mindful that the blockchain is large)
-#BITCOIND_DATADIR="/var/lib/luxd"
+# Where to write motiond data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/motiond"
 
-# User and group to own luxd process
-#BITCOIND_USER="lux"
-#BITCOIND_GROUP="lux"
+# User and group to own motiond process
+#BITCOIND_USER="motion"
+#BITCOIND_GROUP="motion"
 
-# Path to luxd executable
-#BITCOIND_BIN="/usr/bin/luxd"
+# Path to motiond executable
+#BITCOIND_BIN="/usr/bin/motiond"
 
-# Nice value to run luxd under
+# Nice value to run motiond under
 #BITCOIND_NICE=0
 
 # Additional options (avoid -conf and -datadir, use flags above)

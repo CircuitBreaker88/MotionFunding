@@ -2,7 +2,7 @@ from .address import *
 from .script import *
 from .mininode import *
 from .util import *
-from .luxconfig import *
+from .motionconfig import *
 from .blocktools import *
 from .key import *
 import io
@@ -12,7 +12,7 @@ def make_transaction(node, vin, vout):
     tx.vin = vin
     tx.vout = vout
     tx.rehash()
-    
+
     unsigned_raw_tx = bytes_to_hex_str(tx.serialize_without_witness())
     signed_raw_tx = node.signrawtransaction(unsigned_raw_tx)['hex']
     return signed_raw_tx
@@ -51,7 +51,7 @@ def make_op_call_output(value, version, gas_limit, gas_price, data, contract):
     scriptPubKey += OP_CALL
     return CTxOut(value, scriptPubKey)
 
-def convert_btc_address_to_lux(addr, main=False):
+def convert_btc_address_to_motion(addr, main=False):
     version, hsh, checksum = base58_to_byte(addr, 25)
     if version == 111:
         return keyhash_to_p2pkh(binascii.unhexlify(hsh), main)
@@ -65,7 +65,7 @@ def p2pkh_to_hex_hash(address):
     return str(base58_to_byte(address, 25)[1])[2:-1]
 
 def hex_hash_to_p2pkh(hex_hash):
-    return keyhash_to_p2pkh(hex_str_to_bytes(hex_hash))    
+    return keyhash_to_p2pkh(hex_str_to_bytes(hex_hash))
 
 def assert_vin(tx, expected_vin):
     assert_equal(len(tx['vin']), len(expected_vin))
@@ -162,19 +162,19 @@ class DGPState:
 
     def send_set_initial_admin(self, sender):
         self.node.sendtoaddress(sender, 1)
-        self.node.sendtocontract(self.contract_address, self.abiSetInitialAdmin, 0, 2000000, LUX_MIN_GAS_PRICE_STR, sender)
+        self.node.sendtocontract(self.contract_address, self.abiSetInitialAdmin, 0, 2000000, MOTION_MIN_GAS_PRICE_STR, sender)
 
     def send_add_address_proposal(self, proposal_address, type1, sender):
         self.node.sendtoaddress(sender, 1)
-        self.node.sendtocontract(self.contract_address, self.abiAddAddressProposal + proposal_address.zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, LUX_MIN_GAS_PRICE_STR, sender)
+        self.node.sendtocontract(self.contract_address, self.abiAddAddressProposal + proposal_address.zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, MOTION_MIN_GAS_PRICE_STR, sender)
 
     def send_remove_address_proposal(self, proposal_address, type1, sender):
         self.node.sendtoaddress(sender, 1)
-        self.node.sendtocontract(self.contract_address, self.abiRemoveAddressProposal + proposal_address.zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, LUX_MIN_GAS_PRICE_STR, sender)
+        self.node.sendtocontract(self.contract_address, self.abiRemoveAddressProposal + proposal_address.zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, MOTION_MIN_GAS_PRICE_STR, sender)
 
     def send_change_value_proposal(self, uint_proposal, type1, sender):
         self.node.sendtoaddress(sender, 1)
-        self.node.sendtocontract(self.contract_address, self.abiChangeValueProposal + hex(uint_proposal)[2:].zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, LUX_MIN_GAS_PRICE_STR, sender)
+        self.node.sendtocontract(self.contract_address, self.abiChangeValueProposal + hex(uint_proposal)[2:].zfill(64) + hex(type1)[2:].zfill(64), 0, 2000000, MOTION_MIN_GAS_PRICE_STR, sender)
 
     def assert_state(self):
         # This assertion is only to catch potential errors in the test code (if we forget to add a generate after an evm call)
@@ -214,7 +214,7 @@ class DGPState:
         for type1, arr1 in enumerate(self.current_on_vote_address_proposals):
             for type2, current_on_vote_address_proposal in enumerate(arr1):
                 self._assert_current_on_vote_address_proposal(type1, type2, current_on_vote_address_proposal)
-                
+
     """
     function getRequiredVotes(uint _type) constant returns (uint val){
         // type 0: adminVotesForParams
@@ -234,7 +234,7 @@ class DGPState:
    function getCurrentOnVoteStatus(uint _type, uint _type2) constant returns (bool val){
         // type 0: addAddress
         // type 1: changeValue
-        // type 2: removeAddress    
+        // type 2: removeAddress
 
         // type2 0: adminKey
         // type2 1: govKey

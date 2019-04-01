@@ -1,2 +1,2 @@
-usr/local/bin/luxd usr/bin
-usr/local/bin/lux-cli usr/bin
+usr/local/bin/motiond usr/bin
+usr/local/bin/motion-cli usr/bin

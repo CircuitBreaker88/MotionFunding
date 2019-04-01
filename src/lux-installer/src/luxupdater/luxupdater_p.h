@@ -1,7 +1,7 @@
-#ifndef LUXUPDATER_LUXUPDATER_P_H
-#define LUXUPDATER_LUXUPDATER_P_H
+#ifndef MOTIONUPDATER_MOTIONUPDATER_P_H
+#define MOTIONUPDATER_MOTIONUPDATER_P_H
 
-#include "luxupdater.h"
+#include "motionupdater.h"
 #include "simplescheduler_p.h"
 #include "atomfeeder.h"
 #include "downloadmanager.h"
@@ -12,16 +12,16 @@
 
 #include <exception>
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
-class LuxUpdaterPrivate : public QObject
+class MotionUpdaterPrivate : public QObject
 {
 public:
-	LuxUpdater *q;
+	MotionUpdater *q;
 
 	QString currentVersion;
-	QList<LuxUpdater::LuxUpdateInfo> updateInfos;
+	QList<MotionUpdater::MotionUpdateInfo> updateInfos;
 	bool normalExit;
 	int lastErrorCode;
 	QByteArray lastErrorLog;
@@ -37,8 +37,8 @@ public:
 	QStringList runArguments;
 	QScopedPointer<AdminAuthoriser> adminAuth;
 
-	LuxUpdaterPrivate(LuxUpdater *q_ptr);
-	~LuxUpdaterPrivate();
+	MotionUpdaterPrivate(MotionUpdater *q_ptr);
+	~MotionUpdaterPrivate();
 
 	bool startUpdateCheck();
 	void stopUpdateCheck(int delay, bool async);
@@ -58,6 +58,6 @@ private:
 
 }
 
-Q_DECLARE_LOGGING_CATEGORY(logLuxUpdater)
+Q_DECLARE_LOGGING_CATEGORY(logMotionUpdater)
 
-#endif // LUXUPDATER_LUXUPDATER_P_H
+#endif // MOTIONUPDATER_MOTIONUPDATER_P_H

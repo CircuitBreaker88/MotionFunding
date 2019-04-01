@@ -1,9 +1,9 @@
-// Copyright (c) 2015-2018 The LUX developers
+// Copyright (c) 2015-2018 The Motion Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef LUX_QT_EULA_H
-#define LUX_QT_EULA_H
+#ifndef MOTION_QT_EULA_H
+#define MOTION_QT_EULA_H
 
 #include <QDialog>
 
@@ -34,4 +34,4 @@ private:
     bool isRemembered;
 };
 
-#endif // LUX_QT_EULA_H
+#endif // MOTION_QT_EULA_H

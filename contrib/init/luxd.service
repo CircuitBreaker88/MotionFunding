@@ -1,19 +1,19 @@
 [Unit]
-Description=LUX's distributed currency daemon
+Description=MOTION's distributed currency daemon
 After=network.target
 
 [Service]
-User=lux
-Group=lux
+User=motion
+Group=motion
 
 Type=forking
-PIDFile=/var/lib/luxd/luxd.pid
+PIDFile=/var/lib/motiond/motiond.pid
 
-ExecStart=/usr/bin/luxd -daemon -pid=/var/lib/luxd/luxd.pid \
-          -conf=/etc/lux/lux.conf -datadir=/var/lib/luxd
+ExecStart=/usr/bin/motiond -daemon -pid=/var/lib/motiond/motiond.pid \
+          -conf=/etc/motion/motion.conf -datadir=/var/lib/motiond
 
-ExecStop=-/usr/bin/lux-cli -conf=/etc/lux/lux.conf \
-         -datadir=/var/lib/luxd stop
+ExecStop=-/usr/bin/motion-cli -conf=/etc/motion/motion.conf \
+         -datadir=/var/lib/motiond stop
 
 Restart=always
 PrivateTmp=true

@@ -1,107 +1,107 @@
-#include "luxupdater.h"
-#include "luxupdater_p.h"
+#include "motionupdater.h"
+#include "motionupdater_p.h"
 #include "../updatecontroller_p.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QMap>
 
-using namespace QtLuxUpdater;
+using namespace QtMotionUpdater;
 
-const QStringList LuxUpdater::NormalUpdateArguments = {QStringLiteral("--updater")};
-const QStringList LuxUpdater::PassiveUpdateArguments = {QStringLiteral("--updater"), QStringLiteral("skipPrompt=true")};
-const QStringList LuxUpdater::HiddenUpdateArguments = {QStringLiteral("--silentUpdate")};
+const QStringList MotionUpdater::NormalUpdateArguments = {QStringLiteral("--updater")};
+const QStringList MotionUpdater::PassiveUpdateArguments = {QStringLiteral("--updater"), QStringLiteral("skipPrompt=true")};
+const QStringList MotionUpdater::HiddenUpdateArguments = {QStringLiteral("--silentUpdate")};
 
-LuxUpdater::LuxUpdater(QObject *parent) :
-	LuxUpdater("", parent)
+MotionUpdater::MotionUpdater(QObject *parent) :
+	MotionUpdater("", parent)
 {}
 
-LuxUpdater::LuxUpdater(const QString &currentVersion, QObject *parent) :
+MotionUpdater::MotionUpdater(const QString &currentVersion, QObject *parent) :
 	QObject(parent),
-	d(new LuxUpdaterPrivate(this))
+	d(new MotionUpdaterPrivate(this))
 {
 	d->currentVersion = currentVersion;
 }
 
-LuxUpdater::~LuxUpdater() {}
+MotionUpdater::~MotionUpdater() {}
 
-bool LuxUpdater::exitedNormally() const
+bool MotionUpdater::exitedNormally() const
 {
 	return d->normalExit;
 }
 
-int LuxUpdater::errorCode() const
+int MotionUpdater::errorCode() const
 {
 	return d->lastErrorCode;
 }
 
-QByteArray LuxUpdater::errorLog() const
+QByteArray MotionUpdater::errorLog() const
 {
 	return d->lastErrorLog;
 }
 
-bool LuxUpdater::willRunOnExit() const
+bool MotionUpdater::willRunOnExit() const
 {
 	return d->runOnExit;
 }
 
-QString LuxUpdater::currentVersion() const
+QString MotionUpdater::currentVersion() const
 {
 	return d->currentVersion;
 }
 
-bool LuxUpdater::isRunning() const
+bool MotionUpdater::isRunning() const
 {
 	return isUpdaterRunning;
 }
 
-QList<LuxUpdater::LuxUpdateInfo> LuxUpdater::updateInfo() const
+QList<MotionUpdater::MotionUpdateInfo> MotionUpdater::updateInfo() const
 {
 	return d->updateInfos;
 }
 
-bool LuxUpdater::checkForUpdates()
+bool MotionUpdater::checkForUpdates()
 {
 	return d->startUpdateCheck();
 }
 
-void LuxUpdater::abortUpdateCheck(int maxDelay, bool async)
+void MotionUpdater::abortUpdateCheck(int maxDelay, bool async)
 {
 	d->stopUpdateCheck(maxDelay, async);
 }
 
-int LuxUpdater::scheduleUpdate(int delaySeconds, bool repeated)
+int MotionUpdater::scheduleUpdate(int delaySeconds, bool repeated)
 {
 	if((((qint64)delaySeconds) * 1000ll) > (qint64)INT_MAX) {
-		qCWarning(logLuxUpdater) << "delaySeconds to big to be converted to msecs";
+		qCWarning(logMotionUpdater) << "delaySeconds to big to be converted to msecs";
 		return 0;
 	}
 	return d->scheduler->startSchedule(delaySeconds * 1000, repeated);
 }
 
-int LuxUpdater::scheduleUpdate(const QDateTime &when)
+int MotionUpdater::scheduleUpdate(const QDateTime &when)
 {
 	return d->scheduler->startSchedule(when);
 }
 
-void LuxUpdater::cancelScheduledUpdate(int taskId)
+void MotionUpdater::cancelScheduledUpdate(int taskId)
 {
 	d->scheduler->cancelSchedule(taskId);
 }
 
-void LuxUpdater::runUpdaterOnExit(AdminAuthoriser *authoriser)
+void MotionUpdater::runUpdaterOnExit(AdminAuthoriser *authoriser)
 {
 	runUpdaterOnExit(NormalUpdateArguments, authoriser);
 }
 
-void LuxUpdater::runUpdaterOnExit(const QStringList &arguments, AdminAuthoriser *authoriser)
+void MotionUpdater::runUpdaterOnExit(const QStringList &arguments, AdminAuthoriser *authoriser)
 {
 	d->runOnExit = true;
 	d->runArguments = arguments;
 	d->adminAuth.reset(authoriser);
 }
 
-void LuxUpdater::cancelExitRun()
+void MotionUpdater::cancelExitRun()
 {
 	d->runOnExit = false;
 	d->adminAuth.reset();
@@ -109,25 +109,25 @@ void LuxUpdater::cancelExitRun()
 
 
 
-LuxUpdater::LuxUpdateInfo::LuxUpdateInfo() :
+MotionUpdater::MotionUpdateInfo::MotionUpdateInfo() :
 	name(),
 	version(),
 	size(0ull)
 {}
 
-LuxUpdater::LuxUpdateInfo::LuxUpdateInfo(const LuxUpdater::LuxUpdateInfo &other) :
+MotionUpdater::MotionUpdateInfo::MotionUpdateInfo(const MotionUpdater::MotionUpdateInfo &other) :
 	name(other.name),
 	version(other.version),
 	size(other.size)
 {}
 
-LuxUpdater::LuxUpdateInfo::LuxUpdateInfo(QString name, QString version, quint64 size) :
+MotionUpdater::MotionUpdateInfo::MotionUpdateInfo(QString name, QString version, quint64 size) :
 	name(name),
 	version(version),
 	size(size)
 {}
 
-QDebug &operator<<(QDebug &debug, const LuxUpdater::LuxUpdateInfo &info)
+QDebug &operator<<(QDebug &debug, const MotionUpdater::MotionUpdateInfo &info)
 {
 	QDebugStateSaver state(debug);
 	Q_UNUSED(state);

@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The Luxcore developers
+// Copyright (c) 2015-2018 The Motion Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +16,7 @@
 
 #include <boost/assign/list_of.hpp>
 
-///////////////////////////////////////////// // lux
+///////////////////////////////////////////// // motion
 #include <libdevcore/SHA3.h>
 #include <libdevcore/RLP.h>
 //#include "arith_uint256.h"
@@ -58,22 +58,7 @@ bool CheckProof(uint256 hash, unsigned int nBits)
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints = boost::assign::map_list_of
                 ( 0,   uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42") )
-                ( 175,   uint256("0x000000000002611e8e3c2e460e7fcd0a39ee210b9915fc76a5573a0704bb2b33") )
-                ( 2241,   uint256("0x69e2e47fb84085c4b82b6090f701c7ac03a4e510bd1f41cc072c33061cf83a0d") )
-                ( 6901,   uint256("0x0000000000034bab666179e364e0cce7c19eaa255f1e4afd2170356acfa1a3ac") )
-                ( 25318,   uint256("0x092a04ee669d2d2241aba0ec9dcecb548c9cea9ff114b0ee52cdc7ddac98a1f4") )
-                ( 97176,   uint256("0x000000000004e4aac7926e7dbd778f21b15b62f0e4c1d424ac9e5a9889c1724a") )
-                ( 122237,   uint256("0x10f6d17326a0c439f61a21c44a172885469bb60668a0d77be82eead7209183b0") )
-                ( 203690,   uint256("0x00000000000180e78502c3c952f00bf8bba2bc9ffef60e7188c8763582f26ef4") )
-                ( 293220,   uint256("0xe90c89ff18e00b49be312aff64bcc18cba753ff36dde5c7fc216029d7bc2b457") )
-                ( 299500,   uint256("0x94c34653c7b107662f1f44d085be5817d03f8d3f0b3c29b970ce25eb44e03743") )
-                ( 303112,   uint256("0x0000000000026621b448ad1288a7f9762e78a0ef5ab87fcbc016cddc3ded4356") )
-                ( 350095,   uint256("0x000000000007726c464bbdb9bcffc3baf044333f88b79882aa0aefcbe6f0f881") )
-                ( 410000,   uint256("0x000000000008d3f413fdad9d3bf3403d4ea78a7ba94eaf442593ffc4535d4f3d") )
-                ( 460000,   uint256("0x00000000001267a73897a2e01f2fb376e3cb9ddc75c70b31f12d7fd2625879a0") )
-                ( 520000,   uint256("0x0000000000005f31a949ac51bacd2dff29aa4df5892f5fc4dd3580d6f8dfe079") )
-                ( 621950,   uint256("0x000000000009fa3ac44eaf8bb925e6f64aa5ceff8ae775748babda89e278222a") )
-;
+                 ;
 
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
@@ -122,9 +107,9 @@ public:
         consensus.nMajorityWindow = 1000;
         //consensus.BIP34Height = 227931;
         //consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
-        consensus.powLimit = ~uint256(0) >> 20; // LUX starting difficulty is 1 / 2^12
-        consensus.nPowTargetTimespan = 30 * 60; //36 * 60 * 60; // LUX: 1 36hrs
-        consensus.nPowTargetSpacing = 2 * 60;  // LUX: 2 minute
+        consensus.powLimit = ~uint256(0) >> 20; // XMNF starting difficulty is 1 / 2^12
+        consensus.nPowTargetTimespan = 30 * 60; //36 * 60 * 60; // XMNF: 1 36hrs
+        consensus.nPowTargetSpacing = 2 * 60;  // XMNF: 2 minute
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1026; // 95% of 1080 is 1026
@@ -156,10 +141,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x6a;
-        pchMessageStart[1] = 0xb3;
-        pchMessageStart[2] = 0xc8;
-        pchMessageStart[3] = 0xa9;
+        pchMessageStart[0] = 0x3c;
+        pchMessageStart[1] = 0xd1;
+        pchMessageStart[2] = 0xa3;
+        pchMessageStart[3] = 0xe7;
         vAlertPubKey = ParseHex("042d13c016ed91528241bcff222989769417eb10cdb679228c91e26e26900eb9fd053cd9f16a9a2894ad5ebbd551be1a4bd23bd55023679be17f0bd3a16e6fbeba");
         nDefaultPort = 26969;
         nMaxReorganizationDepth = 100;
@@ -168,7 +153,7 @@ public:
         nMasternodeCountDrift = 20;
         nModifierUpdateBlock = 615800;
 
-        const char* pszTimestamp = "Lux - Implemented New PHI Algo PoW/PoS Hybird - Parallel Masternode - ThankYou - 216k155"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Lux Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1507656633;
@@ -182,11 +167,19 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
         genesis.nVersion = 1;
-        genesis.nTime = 1507656633; //10/10/2017
+        genesis.nTime = 1507656633; //
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 986946;
-        genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // lux
-        genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // lux
+        genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
+        genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
+
+        /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+              genesis.nNonce ++;
+          }
+
+          std::cout << genesis.nNonce << std::endl;
+          std::cout << genesis.GetHash().GetHex() << std::endl;
+          std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -194,17 +187,16 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        vSeeds.push_back(CDNSSeedData("Seed1", "seed.luxcore.tech"));       // LUX seeder
-        vSeeds.push_back(CDNSSeedData("Seed2", "seed.luxseeds.nl"));        // LUX seeder
-        vSeeds.push_back(CDNSSeedData("Seed3", "lux.yiimp.eu"));            // LUX seeder with IPv6
+        vSeeds.push_back(CDNSSeedData("", ""));       // MOTION seeder
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX address start with 'L'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // LUX script addresses start with 'S'
+
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75); // XMNF address start with 'L'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // XMNF script addresses start with 'S'
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1,155);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x07)(0x28)(0xA2)(0x4E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x03)(0xD8)(0xA1)(0xE5).convert_to_container<std::vector<unsigned char> >();
 
-        // LUX BIP44 coin type is '1'
+        // MOTION BIP44 coin type is '1'
         nExtCoinType = 1;
 
         bech32_hrp = "bc";
@@ -223,7 +215,7 @@ public:
         strSporkKey = "04a983220ea7a38a7106385003fef77896538a382a0dcc389cc45f3c98751d9af423a097789757556259351198a8aaa628a1fd644c3232678c5845384c744ff8d7";
 
         strDarksendPoolDummyAddress = "LgcjpYxWa5EB9KCYaRtpPgG8kgiWRvJY38";
-        nStartMasternodePayments = 1507656633; // 10/10/2017
+        nStartMasternodePayments = 1507656633; //
 
         nStakingRoundPeriod = 120; // 2 minutes a round
         nStakingInterval = 22;
@@ -250,9 +242,9 @@ public:
         consensus.nMajorityWindow = 100;
         //consensus.BIP34Height = 227931;
         //consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
-        consensus.powLimit = ~uint256(0) >> 10; // LUX starting difficulty is 1 / 2^12
-        consensus.nPowTargetTimespan = 30 * 60; //36 * 60 * 60; // LUX: 1 36hrs
-        consensus.nPowTargetSpacing = 2 * 60;  // LUX: 2 minute
+        consensus.powLimit = ~uint256(0) >> 10; // XMNF starting difficulty is 1 / 2^12
+        consensus.nPowTargetTimespan = 30 * 60; //36 * 60 * 60; // XMNF: 1 36hrs
+        consensus.nPowTargetSpacing = 2 * 60;  // XMNF: 2 minute
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1368; // 95% of 1440 is
@@ -279,7 +271,7 @@ public:
         nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        const char* pszTimestamp = "Lux - Testnet 1"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Motion - Testnet 1"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1528954643;
@@ -297,21 +289,21 @@ public:
         genesis.nTime = 1528954643; // 14 June 2018 @ 5:37am (UTC)
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 7170961;
-        genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // lux
-        genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // lux
+        genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
+        genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-//        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
-//            genesis.nNonce ++;
-//        }
+      /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+            genesis.nNonce ++;
+        }
 
-//        std::cout << genesis.nNonce << std::endl;
-//        std::cout << genesis.GetHash().GetHex() << std::endl;
-//        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
+        std::cout << genesis.nNonce << std::endl;
+        std::cout << genesis.GetHash().GetHex() << std::endl;
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
         nSwitchPhi2Block = 1000;
         nSplitRewardBlock = 1500;
-        nPruneAfterHeight = 5000;
-        nFirstSCBlock = 10000;
+        nPruneAfterHeight = 2500;
+        nFirstSCBlock = 3000;
         nPreminePaymentandHardForkBlock = 50000;
 
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -321,18 +313,17 @@ public:
 
         //vFixedSeeds.clear();
         //vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("51.15.76.137", "51.15.76.137"));
-        vSeeds.push_back(CDNSSeedData("89.3.178.185", "89.3.178.185"));
+        vSeeds.push_back(CDNSSeedData("", ""));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 48); // Testnet lux addresses start with 'l'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 63);  // Testnet lux script addresses start with 'S'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 48); // Testnet motion addresses start with 'l'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 63);  // Testnet motion script addresses start with 'S'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 155);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        // Testnet lux BIP32 pubkeys start with 'DRKV'
+        // Testnet motion BIP32 pubkeys start with 'DRKV'
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet lux BIP32 prvkeys start with 'DRKP'
+        // Testnet motion BIP32 prvkeys start with 'DRKP'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
-        // Testnet lux BIP44 coin type is '1' (All coin's testnet default)
-        // LUX BIP44 coin type is '1'
+        // Testnet motion BIP44 coin type is '1' (All coin's testnet default)
+        // MOTION BIP44 coin type is '1'
         nExtCoinType = 1;
         bech32_hrp = "tb";
 
@@ -378,8 +369,8 @@ public:
         //consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         //consensus.BIP34Hash = uint256();
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // Lux: 1 day
-        consensus.nPowTargetSpacing = 1 * 60; // Lux: 1 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // Motion: 1 day
+        consensus.nPowTargetSpacing = 1 * 60; // Motion: 1 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -475,9 +466,9 @@ public:
         consensus.nMajorityEnforceBlockUpgrade = 750;
         consensus.nMajorityRejectBlockOutdated = 950;
         consensus.nMajorityWindow = 1000;
-        consensus.powLimit = ~uint256(0) >> 20; // LUX starting difficulty is 1 / 2^12
+        consensus.powLimit = ~uint256(0) >> 20; // XMNF starting difficulty is 1 / 2^12
         consensus.nPowTargetTimespan = 10 * 60; //10 minute
-        consensus.nPowTargetSpacing = 60;  // LUX: 1 minute
+        consensus.nPowTargetSpacing = 60;  // XMNF: 1 minute
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 9; // 95% of 10
@@ -514,7 +505,7 @@ public:
         nModifierUpdateBlock = 615800;
         bech32_hrp = "bcst";
 
-        const char* pszTimestamp = "Lux - Implemented New PHI Algo PoW/PoS Hybrid - Parallel Masternode - ThankYou - 216k155"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Motion - Implemented PHI Algo (Developed by the Lux Core Team) - Parallel Masternode - Prepare for the Motion Funding Platform - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1524645689;
@@ -547,12 +538,12 @@ public:
         assert(consensus.hashGenesisBlock == uint256("0x00000a1a2a728145f14f873037b5f4188c1b36d20f8187d329e412b97cdbaabf"));
         assert(genesis.hashMerkleRoot == uint256("0xb35719fbe3e4d52f06d791e938de406d48defadb83beeb1fdd10c7ef52a481c2"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX Start letter L
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // XMNF Start letter L
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,64);
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1,155);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x07)(0x28)(0xA2)(0x4E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x03)(0xD8)(0xA1)(0xE5).convert_to_container<std::vector<unsigned char> >();
-        // LUX BIP44 coin type is '1'
+        // MOTION BIP44 coin type is '1'
         nExtCoinType = 1;
         fMiningRequiresPeers = true;
         fDefaultConsistencyChecks = false;
@@ -566,7 +557,7 @@ public:
         strSporkKey = "04a983220ea7a38a7106385003fef77896538a382a0dcc389cc45f3c98751d9af423a097789757556259351198a8aaa628a1fd644c3232678c5845384c744ff8d7";
 
         strDarksendPoolDummyAddress = "LgcjpYxWa5EB9KCYaRtpPgG8kgiWRvJY38";
-        nStartMasternodePayments = 1507656633; // 10/10/2017
+        nStartMasternodePayments = 1507656633; //
 
         nStakingRoundPeriod = 120; // 2 minutes a round
         nStakingInterval = 22;

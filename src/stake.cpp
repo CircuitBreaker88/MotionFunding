@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The Luxcore developers
+// Copyright (c) 2015-2018 The Motion Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <boost/assign/list_of.hpp>
@@ -74,7 +74,7 @@ static const bool ENABLE_ADVANCED_STAKING = true;
 
 static const int ADVANCED_STAKING_HEIGHT = 225000;
 
-static const int nLuxProtocolSwitchHeightTestnet = 95150; // 2018-11-29 02:54:56 (1543460096)
+static const int nMotionProtocolSwitchHeightTestnet = 95150; // 2018-11-29 02:54:56 (1543460096)
 
 static std::atomic<bool> nStakingInterrupped;
 
@@ -205,7 +205,7 @@ static bool FindModifierBlockFromCandidates(vector <pair<int64_t, uint256>>& vSo
 
 #   if defined(DEBUG_DUMP_STAKING_INFO) && false
     if (GetBoolArg("-printstakemodifier", false))
-        LogPrintf("%s: selected block %d %s %s\n", __func__, 
+        LogPrintf("%s: selected block %d %s %s\n", __func__,
                   pindexSelected->nHeight,
                   pindexSelected->GetBlockHash().GetHex(),
                   hashBest.ToString());
@@ -396,9 +396,9 @@ bool MultiplyStakeTarget(uint256& bnTarget, int nModifierHeight, int64_t nModifi
     return false;
 }
 
-// LUX Stake modifier used to hash the stake kernel which is chosen as the stake
+// MOTION Stake modifier used to hash the stake kernel which is chosen as the stake
 // modifier (nStakeMinAge - nSelectionTime). So at least, it selects the period later than the stake produces since from the nStakeMinAge
-static bool GetLuxStakeKernel(unsigned int nTimeTx, uint64_t& nStakeModifier, int& nStakeModifierHeight, int64_t& nStakeModifierTime, bool fPrintProofOfStake) {
+static bool GetMotionStakeKernel(unsigned int nTimeTx, uint64_t& nStakeModifier, int& nStakeModifierHeight, int64_t& nStakeModifierTime, bool fPrintProofOfStake) {
     unsigned int nStakeMinAge = Params().StakingMinAge();
     const CBlockIndex* pindex = pindexBestHeader;
     nStakeModifierHeight = pindex->nHeight;
@@ -438,9 +438,9 @@ static bool GetLuxStakeKernel(unsigned int nTimeTx, uint64_t& nStakeModifier, in
 }
 
 // Get the StakeModifier specified by our protocol for the checkhash function.
-// Note: Separated GetKernelStakeModifier & GetLuxStakeKernel for convenient in case we need any other fork later on
+// Note: Separated GetKernelStakeModifier & GetMotionStakeKernel for convenient in case we need any other fork later on
 static bool GetKernelStakeModifier(unsigned int nTimeTx, uint64_t& nStakeModifier, int& nStakeModifierHeight, int64_t& nStakeModifierTime, bool fPrintProofOfStake) {
-    return GetLuxStakeKernel(nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
+    return GetMotionStakeKernel(nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
 }
 
 //instead of looping outside and reinitializing variables many times, we will give a nTimeTx and also search interval so that we can do all the hashing here
@@ -612,7 +612,7 @@ bool Stake::CheckHashNew(const CBlockIndex* pindexPrev, unsigned int nBits, cons
 bool Stake::CheckHash(const CBlockIndex* pindexPrev, unsigned int nBits, const CBlock& blockFrom, const CTransaction& txPrev, const COutPoint& prevout, unsigned int& nTimeTx, uint256& hashProofOfStake) {
 
     const int nBlockHeight = (pindexPrev ? pindexPrev->nHeight : chainActive.Height()) + 1;
-    const int nNewPoSHeight = IsTestNet() ? nLuxProtocolSwitchHeightTestnet : nLuxProtocolSwitchHeight;
+    const int nNewPoSHeight = IsTestNet() ? nMotionProtocolSwitchHeightTestnet : nMotionProtocolSwitchHeight;
     if (nBlockHeight < nNewPoSHeight) // could be skipped if height < last checkpoint
         return CheckHashOld(pindexPrev, nBits, blockFrom, txPrev, prevout, nTimeTx, hashProofOfStake);
     return CheckHashNew(pindexPrev, nBits, blockFrom, txPrev, prevout, nTimeTx, hashProofOfStake);
@@ -781,9 +781,9 @@ bool Stake::CheckProof(CBlockIndex* const pindexPrev, const CBlock &block, uint2
         return error("%s: failed to find block", __func__);
 
     unsigned int nTime = block.nTime;
-    
+
 #ifndef POS_DEBUG
-    const int nNewPoSHeight = IsTestNet() ? nLuxProtocolSwitchHeightTestnet : nLuxProtocolSwitchHeight;
+    const int nNewPoSHeight = IsTestNet() ? nMotionProtocolSwitchHeightTestnet : nMotionProtocolSwitchHeight;
     if (nBlockHeight >= nNewPoSHeight)
 #endif
     {
@@ -793,20 +793,20 @@ bool Stake::CheckProof(CBlockIndex* const pindexPrev, const CBlock &block, uint2
         bool isValidHash = true;
         bool isValidSpeed = true;
 #endif
-    
+
         if (!CheckHash(pindex->pprev, block.nBits, prevBlock, txPrev, txin.prevout, nTime, hashProofOfStake))
         {
-#ifdef POS_DEBUG        
+#ifdef POS_DEBUG
             isValidHash = false;
             invalidHashCnt++;
 #else
             return error("%s: Refuse PoS block %u (Invalid hash)", __func__, nBlockHeight);
-#endif            
+#endif
         }
 
         if (!isSpeedValid(nTime, prevBlock, pindex, nBlockHeight))
         {
-#ifdef POS_DEBUG  
+#ifdef POS_DEBUG
             isValidSpeed = false;
             invalidSpeedCnt++;
 #else
@@ -820,21 +820,21 @@ bool Stake::CheckProof(CBlockIndex* const pindexPrev, const CBlock &block, uint2
             invalidHashSpeedCnt++;
             LogPrintf("POS_HASH: Hash and speed is INVALID (invalidHashSpeedCnt = %ld, PoSTotal = %ld)\n", invalidHashSpeedCnt, PoSTotal);
         }
-        
+
         if (!isValidHash && isValidSpeed)
         {
             invalidHashValidSpeedCnt++;
             LogPrintf("POS_HASH: Hash: INVALID and speed: VALID (invalidHashValidSpeedCnt = %ld, PoSTotal = %ld)\n", invalidHashValidSpeedCnt, PoSTotal);
         }
-        
+
         if (isValidHash && !isValidSpeed)
         {
             invalidSpeedValidHashCnt++;
             LogPrintf("POS_HASH: Hash: VALID and speed: INVALID (invalidSpeedValidHashCnt = %ld, PoSTotal = %ld)\n", invalidSpeedValidHashCnt, PoSTotal);
         }
-        
+
         LogPrintf("POS_HASH: invalidHashCnt = %ld, invalidSpeedCnt = %ld, PoSTotal = %ld\n", invalidHashCnt, invalidSpeedCnt, PoSTotal);
-#endif        
+#endif
     }
 
     return CheckHash(pindexPrev, block.nBits, prevBlock, txPrev, txin.prevout, nTime, hashProofOfStake);
@@ -1241,7 +1241,7 @@ bool Stake::CreateCoinStake(CWallet* wallet, const CKeyStore& keystore, unsigned
         if (chainActive.Height() + 1 == chainParams.PreminePayment()) {
 
             blockValue = 0.8 * COIN;
-        
+
         } else {
 
             blockValue -= masternodePayment;
@@ -1282,7 +1282,7 @@ bool Stake::CreateCoinStake(CWallet* wallet, const CKeyStore& keystore, unsigned
             return error("%s: failed to sign coinstake", __func__);
     }
 
-    // Successfully generated coinstake, reset select timestamp to 
+    // Successfully generated coinstake, reset select timestamp to
     // start next round as soon as possible.
     nLastSelectTime = 0;
 

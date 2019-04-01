@@ -1,5 +1,5 @@
-#ifndef LUXUPDATER_ATOMFEEDER_H
-#define LUXUPDATER_ATOMFEEDER_H
+#ifndef MOTIONUPDATER_ATOMFEEDER_H
+#define MOTIONUPDATER_ATOMFEEDER_H
 
 #include <QtCore/QObject>
 #include <QtNetwork/QNetworkAccessManager>
@@ -9,7 +9,7 @@
 #include <QtCore/QString>
 #include <QtCore/QXmlStreamReader>
 
-namespace QtLuxUpdater {
+namespace QtMotionUpdater {
 
 class AtomFeeder : public QObject
 {
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif // LUXUPDATER_ATOMFEEDER_H
+#endif // MOTIONUPDATER_ATOMFEEDER_H

@@ -4,7 +4,7 @@
 #include <QtNetwork>
 #include <QtCore>
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
     
 class DownloadManager: public QObject

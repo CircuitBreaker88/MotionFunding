@@ -1,5 +1,5 @@
-#include "luxupdater.h"
-#include "luxupdater_p.h"
+#include "motionupdater.h"
+#include "motionupdater_p.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFileInfo>
@@ -7,15 +7,15 @@
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QTimer>
 
-#define REPOSITORY_URL "https://github.com/LUX-Core/lux/releases.atom"
+#define REPOSITORY_URL "https://github.com/Motion-Core/motion/releases.atom"
 
 std::atomic<bool> isUpdaterRunning(false);
 
-using namespace QtLuxUpdater;
+using namespace QtMotionUpdater;
 
-Q_LOGGING_CATEGORY(logLuxUpdater, "LuxUpdater")
+Q_LOGGING_CATEGORY(logMotionUpdater, "MotionUpdater")
 
-LuxUpdaterPrivate::LuxUpdaterPrivate(LuxUpdater *q_ptr) :
+MotionUpdaterPrivate::MotionUpdaterPrivate(MotionUpdater *q_ptr) :
 	QObject(nullptr),
 	q(q_ptr),
 	currentVersion(),
@@ -33,16 +33,16 @@ LuxUpdaterPrivate::LuxUpdaterPrivate(LuxUpdater *q_ptr) :
 {
 	isUpdaterRunning = false;
 	connect(qApp, &QCoreApplication::aboutToQuit,
-			this, &LuxUpdaterPrivate::onAppAboutToExit,
+			this, &MotionUpdaterPrivate::onAppAboutToExit,
 			Qt::DirectConnection);
 	connect(scheduler, &SimpleScheduler::scheduleTriggered,
-			this, &LuxUpdaterPrivate::startUpdateCheck);
+			this, &MotionUpdaterPrivate::startUpdateCheck);
 }
 
-LuxUpdaterPrivate::~LuxUpdaterPrivate()
+MotionUpdaterPrivate::~MotionUpdaterPrivate()
 {
 	if (runOnExit)
-		qCWarning(logLuxUpdater) << "LuxUpdater destroyed with run on exit active before the application quit";
+		qCWarning(logMotionUpdater) << "MotionUpdater destroyed with run on exit active before the application quit";
 
 	if (atomFeeder) {
 		delete atomFeeder;
@@ -55,7 +55,7 @@ LuxUpdaterPrivate::~LuxUpdaterPrivate()
 	}
 }
 
-bool LuxUpdaterPrivate::startUpdateCheck()
+bool MotionUpdaterPrivate::startUpdateCheck()
 {
 	if (isUpdaterRunning) {
 		return false;
@@ -70,7 +70,7 @@ bool LuxUpdaterPrivate::startUpdateCheck()
 	atomFeeder = new AtomFeeder(REPOSITORY_URL);
 
 	connect(atomFeeder, &AtomFeeder::getVersionListDone,
-			this, &LuxUpdaterPrivate::onUpdaterReady);
+			this, &MotionUpdaterPrivate::onUpdaterReady);
 
 	atomFeeder->start();
 
@@ -81,7 +81,7 @@ bool LuxUpdaterPrivate::startUpdateCheck()
 	return true;
 }
 
-void LuxUpdaterPrivate::stopUpdateCheck(int delay, bool async)
+void MotionUpdaterPrivate::stopUpdateCheck(int delay, bool async)
 {
 	if (atomFeeder) {
 		if (delay > 0) {
@@ -99,36 +99,36 @@ void LuxUpdaterPrivate::stopUpdateCheck(int delay, bool async)
 	}
 }
 
-QString LuxUpdaterPrivate::getDownloadUrl(QString version)
+QString MotionUpdaterPrivate::getDownloadUrl(QString version)
 {
 #if defined(Q_OS_WIN32)
-	//QString fileName = "lux-qt-win32.zip";
-	QString fileName = "lux-qt-win.zip";
+	//QString fileName = "motion-qt-win32.zip";
+	QString fileName = "motion-qt-win.zip";
 #elif defined(Q_OS_WIN)
-	//QString fileName = "lux-qt-win64.zip";
-	QString fileName = "lux-qt-win.zip";
+	//QString fileName = "motion-qt-win64.zip";
+	QString fileName = "motion-qt-win.zip";
 #elif defined(Q_OS_OSX)
-	QString fileName = "lux-qt-mac.dmg";
+	QString fileName = "motion-qt-mac.dmg";
 #else
-	QString fileName = 1 ? "lux-qt-linux-16.zip" : "lux-qt-linux-18.zip";
+	QString fileName = 1 ? "motion-qt-linux-16.zip" : "motion-qt-linux-18.zip";
 #endif
-	return "https://github.com/LUX-Core/lux/releases/download/" + version + "/" + fileName;
+	return "https://github.com/Motion-Core/motion/releases/download/" + version + "/" + fileName;
 }
 
-void LuxUpdaterPrivate::onDownloadProgress(DownloadManager::DownloadProgress progress)
+void MotionUpdaterPrivate::onDownloadProgress(DownloadManager::DownloadProgress progress)
 {
 
 }
 
-void LuxUpdaterPrivate::onDownloadFinished(DownloadManager::DownloadProgress progress)
+void MotionUpdaterPrivate::onDownloadFinished(DownloadManager::DownloadProgress progress)
 {
 
 }
 
-void LuxUpdaterPrivate::onDownloadCheckSize(DownloadManager::DownloadProgress progress)
+void MotionUpdaterPrivate::onDownloadCheckSize(DownloadManager::DownloadProgress progress)
 {
 	if (progress.totalSize > 0) {
-		LuxUpdater::LuxUpdateInfo updateInfo("Lux wallet", newVersion, progress.totalSize);
+		MotionUpdater::MotionUpdateInfo updateInfo("Motion wallet", newVersion, progress.totalSize);
 		updateInfos.append(updateInfo);
 
 		if (downloadManager) {
@@ -150,7 +150,7 @@ void LuxUpdaterPrivate::onDownloadCheckSize(DownloadManager::DownloadProgress pr
 	}
 }
 
-void LuxUpdaterPrivate::onUpdaterReady()
+void MotionUpdaterPrivate::onUpdaterReady()
 {
 	if (atomFeeder) {
 		normalExit = true;
@@ -164,7 +164,7 @@ void LuxUpdaterPrivate::onUpdaterReady()
 				if (downloadManager == nullptr) {
 					downloadManager = new DownloadManager(this);
 					connect(downloadManager, &DownloadManager::downloadFinished,
-							this, &LuxUpdaterPrivate::onDownloadCheckSize);
+							this, &MotionUpdaterPrivate::onDownloadCheckSize);
 				}
 				newVersion = version;
 				downloadManager->append(getDownloadUrl(version), true);
@@ -186,7 +186,7 @@ void LuxUpdaterPrivate::onUpdaterReady()
 	}
 }
 
-void LuxUpdaterPrivate::updaterError()
+void MotionUpdaterPrivate::updaterError()
 {
 	if (atomFeeder) {
 		normalExit = false;
@@ -201,7 +201,7 @@ void LuxUpdaterPrivate::updaterError()
 	}
 }
 
-void LuxUpdaterPrivate::onAppAboutToExit()
+void MotionUpdaterPrivate::onAppAboutToExit()
 {
 	if (runOnExit) {
 		QFileInfo appInfo(QCoreApplication::applicationFilePath());
@@ -215,7 +215,7 @@ void LuxUpdaterPrivate::onAppAboutToExit()
 		}
 
 		if (!ok) {
-			qCWarning(logLuxUpdater) << "Unable to start" << appInfo.absoluteFilePath()
+			qCWarning(logMotionUpdater) << "Unable to start" << appInfo.absoluteFilePath()
 										<< "with arguments" << runArguments
 										<< "as" << (adminAuth ? "admin/root" : "current user");
 		}

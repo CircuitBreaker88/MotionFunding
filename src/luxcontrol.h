@@ -1,14 +1,14 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The Luxcore developers
+// Copyright (c) 2015-2018 The Motion Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
- * Functionality for communicating with LuxGate.
+ * Functionality for communicating with MotionGate.
  */
-#ifndef BITCOIN_LUXCONTROL_H
-#define BITCOIN_LUXCONTROL_H
+#ifndef BITCOIN_MOTIONCONTROL_H
+#define BITCOIN_MOTIONCONTROL_H
 
 #include <string>
 
@@ -16,13 +16,13 @@
 #include <boost/chrono/chrono.hpp>
 #include <boost/thread.hpp>
 
-extern const std::string DEFAULT_LUX_CONTROL;
+extern const std::string DEFAULT_MOTION_CONTROL;
 static const bool DEFAULT_LISTEN_ONION = true;
 
-void StartLuxControl(boost::thread_group& threadGroup);
-void InterruptLuxControl();
-void StopLuxControl();
+void StartMotionControl(boost::thread_group& threadGroup);
+void InterruptMotionControl();
+void StopMotionControl();
 
-#endif /* BITCOIN_LUXCONTROL_H */
+#endif /* BITCOIN_MOTIONCONTROL_H */
 
 

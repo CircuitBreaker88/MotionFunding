@@ -1,20 +1,20 @@
-#ifndef ADDEDITLUXNODE_H
-#define ADDEDITLUXNODE_H
+#ifndef ADDEDITMOTIONNODE_H
+#define ADDEDITMOTIONNODE_H
 
 #include <QDialog>
 
 namespace Ui {
-class AddEditLuxNode;
+class AddEditMotionNode;
 }
 
 
-class AddEditLuxNode : public QDialog
+class AddEditMotionNode : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AddEditLuxNode(QWidget *parent = 0);
-    ~AddEditLuxNode();
+    explicit AddEditMotionNode(QWidget *parent = 0);
+    ~AddEditMotionNode();
 
 protected:
 
@@ -25,7 +25,7 @@ private Q_SLOTS:
 signals:
 
 private:
-    Ui::AddEditLuxNode *ui;
+    Ui::AddEditMotionNode *ui;
 };
 
-#endif // ADDEDITLUXNODE_H
+#endif // ADDEDITMOTIONNODE_H

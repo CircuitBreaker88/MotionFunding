@@ -1,5 +1,5 @@
-#ifndef LUXUPDATER_LUXUPDATER_H
-#define LUXUPDATER_LUXUPDATER_H
+#ifndef MOTIONUPDATER_MOTIONUPDATER_H
+#define MOTIONUPDATER_MOTIONUPDATER_H
 
 #include "adminauthoriser.h"
 
@@ -11,12 +11,12 @@
 #include <QtCore/qversionnumber.h>
 #include <QtCore/qscopedpointer.h>
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
-class LuxUpdaterPrivate;
+class MotionUpdaterPrivate;
 //! The main updater. Can check for updates and run the current app as updater
-class LuxUpdater : public QObject
+class MotionUpdater : public QObject
 {
 	Q_OBJECT
 
@@ -25,11 +25,11 @@ class LuxUpdater : public QObject
 	//! Specifies whether the updater is currently checking for updates or not
 	Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
 	//! Holds extended information about the last update check
-	Q_PROPERTY(QList<LuxUpdateInfo> updateInfo READ updateInfo NOTIFY updateInfoChanged)
+	Q_PROPERTY(QList<MotionUpdateInfo> updateInfo READ updateInfo NOTIFY updateInfoChanged)
 
 public:
 	//! Provides information about updates for components
-	struct LuxUpdateInfo
+	struct MotionUpdateInfo
 	{
 		//! The name of the component that has an update
 		QString name;
@@ -39,11 +39,11 @@ public:
 		quint64 size;
 
 		//! Default Constructor
-		LuxUpdateInfo();
+		MotionUpdateInfo();
 		//! Copy Constructor
-		LuxUpdateInfo(const LuxUpdateInfo &other);
+		MotionUpdateInfo(const MotionUpdateInfo &other);
 		//! Constructor that takes name, version and size
-		LuxUpdateInfo(QString name, QString version, quint64 size);
+		MotionUpdateInfo(QString name, QString version, quint64 size);
 	};
 
 	static const QStringList NormalUpdateArguments;
@@ -51,11 +51,11 @@ public:
 	static const QStringList HiddenUpdateArguments;
 
 	//! Default constructor
-	explicit LuxUpdater(QObject *parent = nullptr);
+	explicit MotionUpdater(QObject *parent = nullptr);
 	//! Constructer with an explicitly set currentVersion
-	explicit LuxUpdater(const QString &currentVersion, QObject *parent = nullptr);
+	explicit MotionUpdater(const QString &currentVersion, QObject *parent = nullptr);
 	//! Destroyes the updater and kills the update check (if running)
-	~LuxUpdater();
+	~MotionUpdater();
 
 	//! Returns `true`, if the updater exited normally
 	bool exitedNormally() const;
@@ -67,12 +67,12 @@ public:
 	//! Returns `true` if will be started on exit
 	bool willRunOnExit() const;
 
-	//! readAcFn{LuxUpdater::currentVersion}
+	//! readAcFn{MotionUpdater::currentVersion}
 	QString currentVersion() const;
-	//! readAcFn{LuxUpdater::running}
+	//! readAcFn{MotionUpdater::running}
 	bool isRunning() const;
-	//! readAcFn{LuxUpdater::updateInfo}
-	QList<LuxUpdateInfo> updateInfo() const;
+	//! readAcFn{MotionUpdater::updateInfo}
+	QList<MotionUpdateInfo> updateInfo() const;
 
 public Q_SLOTS:
 	//! Starts checking for updates
@@ -98,19 +98,19 @@ Q_SIGNALS:
 	//! Will be emitted as soon as the updater finished checking for updates
 	void checkUpdatesDone(bool hasUpdates, bool hasError);
 
-	//! notifyAcFn{LuxUpdater::running}
+	//! notifyAcFn{MotionUpdater::running}
 	void runningChanged(bool running);
-	//! notifyAcFn{LuxUpdater::updateInfo}
-	void updateInfoChanged(QList<LuxUpdater::LuxUpdateInfo> updateInfo);
+	//! notifyAcFn{MotionUpdater::updateInfo}
+	void updateInfoChanged(QList<MotionUpdater::MotionUpdateInfo> updateInfo);
 
 private:
-	QScopedPointer<LuxUpdaterPrivate> d;
+	QScopedPointer<MotionUpdaterPrivate> d;
 };
 
 }
 
-Q_DECLARE_METATYPE(QtLuxUpdater::LuxUpdater::LuxUpdateInfo)
+Q_DECLARE_METATYPE(QtMotionUpdater::MotionUpdater::MotionUpdateInfo)
 
-QDebug &operator<<(QDebug &debug, const QtLuxUpdater::LuxUpdater::LuxUpdateInfo &info);
+QDebug &operator<<(QDebug &debug, const QtMotionUpdater::MotionUpdater::MotionUpdateInfo &info);
 
-#endif // LUXUPDATER_LUXUPDATER_H
+#endif // MOTIONUPDATER_MOTIONUPDATER_H

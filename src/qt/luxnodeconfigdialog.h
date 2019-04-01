@@ -1,10 +1,10 @@
-#ifndef LUXNODECONFIGDIALOG_H
-#define LUXNODECONFIGDIALOG_H
+#ifndef MOTIONNODECONFIGDIALOG_H
+#define MOTIONNODECONFIGDIALOG_H
 
 #include <QDialog>
 
 namespace Ui {
-    class LuxNodeConfigDialog;
+    class MotionNodeConfigDialog;
 }
 
 QT_BEGIN_NAMESPACE
@@ -12,16 +12,16 @@ class QModelIndex;
 QT_END_NAMESPACE
 
 /** Dialog showing transaction details. */
-class LuxNodeConfigDialog : public QDialog
+class MotionNodeConfigDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit LuxNodeConfigDialog(QWidget *parent = 0, QString nodeAddress = "123.456.789.123:28666", QString privkey="MASTERNODEPRIVKEY");
-    ~LuxNodeConfigDialog();
+    explicit MotionNodeConfigDialog(QWidget *parent = 0, QString nodeAddress = "123.456.789.123:28666", QString privkey="MASTERNODEPRIVKEY");
+    ~MotionNodeConfigDialog();
 
 private:
-    Ui::LuxNodeConfigDialog *ui;
+    Ui::MotionNodeConfigDialog *ui;
 };
 
-#endif // LUXNODECONFIGDIALOG_H
+#endif // MOTIONNODECONFIGDIALOG_H

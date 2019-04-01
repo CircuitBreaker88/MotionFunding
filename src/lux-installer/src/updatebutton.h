@@ -1,12 +1,12 @@
-#ifndef QTLUXUPDATER_UPDATEBUTTON_H
-#define QTLUXUPDATER_UPDATEBUTTON_H
+#ifndef QTMOTIONUPDATER_UPDATEBUTTON_H
+#define QTMOTIONUPDATER_UPDATEBUTTON_H
 
 #include "updatecontroller.h"
 
 #include <qscopedpointer.h>
 #include <qwidget.h>
 
-namespace QtLuxUpdater
+namespace QtMotionUpdater
 {
 
 class UpdateButtonPrivate;
@@ -72,4 +72,4 @@ private:
 
 }
 
-#endif // QTLUXUPDATER_UPDATEBUTTON_H
+#endif // QTMOTIONUPDATER_UPDATEBUTTON_H

@@ -1,38 +1,38 @@
-Luxcore
+Motion 
 =====================
 
 Setup
 ---------------------
-[Luxcore](http://luxcore.io) is the original LUX client and it builds the backbone of the network. However, it downloads and stores the entire history of LUX transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Motion ](http://motioncore.io) is the original MOTION client and it builds the backbone of the network. However, it downloads and stores the entire history of MOTION transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run LUX on your native platform.
+The following are some helpful notes on how to run MOTION on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- bin/32/lux-qt (GUI, 32-bit) or bin/32/luxd (headless, 32-bit)
-- bin/64/lux-qt (GUI, 64-bit) or bin/64/luxd (headless, 64-bit)
+- bin/32/motion-qt (GUI, 32-bit) or bin/32/motiond (headless, 32-bit)
+- bin/64/motion-qt (GUI, 64-bit) or bin/64/motiond (headless, 64-bit)
 
 ### Windows
 
-Unpack the files into a directory, and then run lux-qt.exe.
+Unpack the files into a directory, and then run motion-qt.exe.
 
 ### OSX
 
-Drag LUX-Qt to your applications folder, and then run LUX-Qt.
+Drag MOTION-Qt to your applications folder, and then run MOTION-Qt.
 
 ### Need Help?
 
-* See the documentation at the [LUX Wiki](https://github.com/LUX-Core/lux/wiki) ***TODO***
+* See the documentation at the [MOTION Wiki](https://github.com/Motion-Core/motion/wiki) ***TODO***
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=2254046.0) or on the [LUX Telegram](https://t.me/LUXcoinOfficialChat).
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=2254046.0) or on the [MOTION Telegram](https://t.me/MOTIONcoinOfficialChat).
 
 Building
 ---------------------
-The following are developer notes on how to build LUX on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build MOTION on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OSX Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -40,7 +40,7 @@ The following are developer notes on how to build LUX on your native platform. T
 
 Development
 ---------------------
-The Lux repo's [root README](https://github.com/LUX-Project/LUX/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Motion repo's [root README](https://github.com/MOTION-Project/MOTION/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -54,8 +54,8 @@ The Lux repo's [root README](https://github.com/LUX-Project/LUX/blob/master/READ
 
 ### Resources
 
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [LUX](http://forum.lux.org/) forum.
-* Join the [LUX-Dev](https://lux-dev.slack.com/) Slack group ([Sign-Up](https://lux-dev.herokuapp.com/)).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [MOTION](http://forum.motion.org/) forum.
+* Join the [MOTION-Dev](https://motion-dev.slack.com/) Slack group ([Sign-Up](https://motion-dev.herokuapp.com/)).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
