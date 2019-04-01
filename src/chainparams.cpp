@@ -57,7 +57,7 @@ bool CheckProof(uint256 hash, unsigned int nBits)
 //    timestamp before)
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints = boost::assign::map_list_of
-                ( 0,   uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42") )
+                ( 0,   uint256("0x0000038df03de265d84d9ae463274c1b5d288ab0d79f1e4e3e25e404258f0e04") )
                  ;
 
 static const Checkpoints::CCheckpointData data = {
@@ -130,10 +130,10 @@ public:
         //TODO: fix cyclic dependency
         consensus.vDeployments[Consensus::SMART_CONTRACTS_HARDFORK].bit = 30;
 
-        nSwitchPhi2Block = 299501;
-        nFirstSCBlock = 350000;
-        nPruneAfterHeight = 300000;
-        nSplitRewardBlock = 300000;
+        nSwitchPhi2Block = 129600;
+        nFirstSCBlock = 129600;
+        nPruneAfterHeight = 1500;
+        nSplitRewardBlock = 1000;
         nPreminePaymentandHardForkBlock = 621950;
 
         /**
@@ -169,11 +169,11 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1554159502; //
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 986946;
+        genesis.nNonce = 3153054;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-          while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+        /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
               genesis.nNonce ++;
           }
 
@@ -181,16 +181,16 @@ public:
           std::cout << genesis.GetHash().GetHex() << std::endl;
           std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
-        consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = genesis.GetHash(); */
 
-        assert(consensus.hashGenesisBlock == uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42"));
-        assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
+        assert(consensus.hashGenesisBlock == uint256("0x0000038df03de265d84d9ae463274c1b5d288ab0d79f1e4e3e25e404258f0e04"));
+        assert(genesis.hashMerkleRoot == uint256("0x119a0657590b62232b0f1b6f3a0ba158f43cee79ae92079e6290b9e82e12f6ab"));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
         vSeeds.push_back(CDNSSeedData("", ""));       // MOTION seeder
 
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75); // XMNF address start with 'L'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75); // XMNF address start with 'X'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // XMNF script addresses start with 'S'
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1,155);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x07)(0x28)(0xA2)(0x4E).convert_to_container<std::vector<unsigned char> >();
@@ -288,17 +288,17 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1554159502; // 14 June 2018 @ 5:37am (UTC)
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 7170961;
+        genesis.nNonce = 1;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // motion
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // motion
 
-      /*  while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
             genesis.nNonce ++;
         }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
         nSwitchPhi2Block = 1000;
         nSplitRewardBlock = 1500;
