@@ -72,7 +72,7 @@ using namespace std;
 
 const int LAST_HEIGHT_FEE_BLOCK = 180000;
 
-static const int POS_REWARD_CHANGED_BLOCK = 300000;
+static const int POS_REWARD_CHANGED_BLOCK = 1000;
 
 /**
  * Global MotionState
@@ -1042,7 +1042,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
            return error("AcceptToMemoryPool : not accepting transaction %s with mempoolbanned output (%s)", tx.GetHash().ToString().c_str(), mempoolbanname);
         }
     }
-    
+
     BOOST_FOREACH(const CTxIn txin, tx.vin) {
         const COutPoint &outpoint = txin.prevout;
 
@@ -1940,19 +1940,13 @@ CAmount GetProofOfWorkReward(int64_t nFees, int nHeight)
     if (nHeight < 1) {
         nSubsidy = 1 * COIN;
     } else if (nHeight == 1) {
-        nSubsidy = 3000000 * COIN;
-    } else if (nHeight < 500) {
+        nSubsidy = 525000 * COIN;
+    } else if (nHeight < 129600) {
+        nSubsidy = 4 * COIN;
+    } else if (nHeight < 259200) {
+        nSubsidy = 2 * COIN;
+    } else if (nHeight < 388800) {
         nSubsidy = 1 * COIN;
-    } else if (nHeight == 501) {
-        nSubsidy = 1000 * COIN;
-    } else if (nHeight < 1000000) {
-        nSubsidy = 10 * COIN;
-    } else if (nHeight < 1001000) {
-        nSubsidy = 30 * COIN;
-    } else if (nHeight < 5000000) {
-        nSubsidy = 10 * COIN;
-    } else if (nHeight < 6000000) {
-        nSubsidy = 10 * COIN;
     } else {
         nSubsidy = 1 * COIN;
     }
@@ -1969,10 +1963,18 @@ CAmount GetProofOfStakeReward(int64_t nFees, int nHeight)
 {
     CAmount nSubsidy = STATIC_POS_REWARD;
 
-    // First 100,000 blocks double stake for masternode ready
-    if (nHeight < 100000) {
+    if (nHeight < 129600) {
         nSubsidy = 2 * COIN;
-    } else {
+    } else if (nHeight < 259200) {
+        nSubsidy = 2 * COIN;
+    } else if (nHeight < 388800) {
+      nSubsidy = 4 * COIN;
+    } else if (nHeight < 518400) {
+      nSubsidy = 4 * COIN;
+    } else if (nHeight < 648000) {
+      nSubsidy = 2 * COIN;
+    }
+    else {
         nSubsidy = 1 * COIN;
     }
 
@@ -1984,14 +1986,10 @@ CAmount GetMasternodePosReward(int nHeight, CAmount blockValue)
     const CChainParams& chainParams = Params();
     CAmount ret;
     if (nHeight >= POS_REWARD_CHANGED_BLOCK || IsTestNet()) {
-        ret = blockValue * 0.2; //20% for masternode
-        if (nHeight == chainParams.PreminePayment() && !IsTestNet()) {
-            ret = blockValue * 250000; //premine mint
-        }
     } else {
-        ret = blockValue * 0.4; //40% for masternode
+        ret = blockValue * 0.6; //60% for masternode
     }
-    return ret;
+    return ret = blockValue * 0.6;
 }
 
 bool IsInitialBlockDownload()
