@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The Motion Developers
+// Copyright (c) 2015-2019 The Motion Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -130,11 +130,11 @@ public:
         //TODO: fix cyclic dependency
         consensus.vDeployments[Consensus::SMART_CONTRACTS_HARDFORK].bit = 30;
 
-        nSwitchPhi2Block = 1000;
+        nSwitchPhi2Block = 200;
         nFirstSCBlock = 129600;
-        nPruneAfterHeight = 1500;
-        nSplitRewardBlock = 1000;
-        nPreminePaymentandHardForkBlock = 621950;
+        nPruneAfterHeight = 750;
+        nSplitRewardBlock = 500;
+        nPreminePaymentandHardForkBlock = 500;
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -300,11 +300,11 @@ public:
         std::cout << genesis.GetHash().GetHex() << std::endl;
         std::cout << genesis.hashMerkleRoot.GetHex() << std::endl; */
 
-        nSwitchPhi2Block = 1000;
-        nSplitRewardBlock = 1500;
-        nPruneAfterHeight = 2500;
+        nSwitchPhi2Block = 250;
+        nSplitRewardBlock = 500;
+        nPruneAfterHeight = 750;
         nFirstSCBlock = 3000;
-        nPreminePaymentandHardForkBlock = 50000;
+        nPreminePaymentandHardForkBlock = 1000;
 
         consensus.hashGenesisBlock = genesis.GetHash();
 

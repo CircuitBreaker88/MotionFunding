@@ -1,6 +1,6 @@
 #!/bin/sh
 #-###############################################-#
-# C++ Cross-Compiler - The Motion Developer-2018 #
+# C++ Cross-Compiler - The Motion Developer-2019 #
 #-###############################################-#
 
 # Set platform variables
