@@ -731,10 +731,6 @@ bool Stake::CheckProof(CBlockIndex* const pindexPrev, const CBlock &block, uint2
 {
     int nBlockHeight = (pindexPrev ? pindexPrev->nHeight : chainActive.Height()) + 1;
 
-    // Reject all blocks from older forks
-    if (nBlockHeight > SNAPSHOT_BLOCK && block.nTime < SNAPSHOT_VALID_TIME)
-        return error("%s: Invalid block %d, time too old (%x) for %s", __func__, nBlockHeight, block.nTime, block.GetHash().GetHex());
-
     if (block.vtx.size() < 2)
         return error("%s: called on non-coinstake %s", __func__, block.ToString());
 

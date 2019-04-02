@@ -79,22 +79,14 @@ class CValidationState;
 struct CBlockTemplate;
 struct CNodeStateStats;
 
-#define START_MASTERNODE_PAYMENTS_TESTNET 1529152909 /* 16 June 2018 (block 1500) */
+#define START_MASTERNODE_PAYMENTS_TESTNET 1529152909
 #define START_MASTERNODE_PAYMENTS 1432907775
 
-#ifndef SNAPSHOT_VALID_TIME
-#define SNAPSHOT_VALID_TIME  1530150000 /* June 28, 2018 01:40 AM GMT */
-#endif
-
-#ifndef SNAPSHOT_BLOCK
-#define SNAPSHOT_BLOCK 299500
-#endif
-
 #ifndef WORKING_VERSION
-#define WORKING_VERSION "/Motion :5.3.0/"
+#define WORKING_VERSION "/Motion :1.0.0/"
 #endif
 
-static const int64_t DARKSEND_COLLATERAL = (16120*COIN); //16120 XMNF
+static const int64_t DARKSEND_COLLATERAL = (5000*COIN); //5000 XMNF
 static const int64_t DARKSEND_FEE = (0.002*COIN); // reward masternode
 static const int64_t DARKSEND_POOL_MAX = (1999999.99*COIN);
 
@@ -200,7 +192,7 @@ void updateBlockSizeParams(unsigned int newBlockSize);
 inline bool IsProtocolV2(int nHeight) { return IsTestNet() || nHeight > 0; }
 inline int64_t GetMNCollateral(int nHeight) {
     if (IsTestNet() || Params().NetworkID() == CBaseChainParams::SEGWITTEST || Params().NetworkID() == CBaseChainParams::REGTEST) return 50;
-    return nHeight>=30000 ? 16120 : 1999999;
+    return nHeight>=30000 ? 5000 : 1999999;
 }
 
 struct BlockHasher {

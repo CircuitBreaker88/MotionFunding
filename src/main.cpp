@@ -4941,12 +4941,6 @@ bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, C
         }
     }
 
-    // Reject all blocks from old chain forks
-    if (nHeight > SNAPSHOT_BLOCK && pblock->nTime < SNAPSHOT_VALID_TIME) {
-        return error("%s: Invalid block %d, time too old (%x) for %s",
-                __func__, nHeight, pblock->nTime, pblock->GetHash().GetHex());
-    }
-
     CBlockIndex* pindex = NULL;
     while (true) {
         TRY_LOCK(cs_main, lockMain);
